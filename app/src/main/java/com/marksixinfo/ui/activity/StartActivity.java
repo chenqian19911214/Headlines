@@ -66,7 +66,7 @@ public class StartActivity extends ActivityBase {
 
         CommonUtils.setCurrentLottery(getApplicationContext(),
 //                "{\"period\":\"2019057\",\"open\":1,\"lottery\":[\"43\",\"13\",\"11\",\"17\",\"33\",\"14\",\"27\"]}");
-                "{\"period\":\" 2019058\",\"open\":1,\"lottery\":[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]}");
+                "{\"period\":\"2019058\",\"open\":1,\"lottery\":[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]}");
     }
 
     /**

@@ -125,7 +125,7 @@ public class MarkSixApp extends Application {
            自定义日志将会在Logcat中输出。
           建议在测试阶段建议设置成true，发布时设置为false。
         * */
-        CrashReport.initCrashReport(this, BUGLY_ID, true, strategy);
+        CrashReport.initCrashReport(this, BUGLY_ID, isDebug, strategy);
 
     }
 
@@ -196,7 +196,7 @@ public class MarkSixApp extends Application {
             }
         };
 
-        Bugly.init(this, BUGLY_ID, true);
+        Bugly.init(this, BUGLY_ID, isDebug);
     }
 
     private void initAutoSizeConfig() {
