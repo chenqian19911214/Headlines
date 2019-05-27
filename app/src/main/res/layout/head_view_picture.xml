@@ -30,7 +30,7 @@
 
             <TextView
                 android:id="@+id/picture_add_time"
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/grey_999"
                 android:textSize="13sp" />
