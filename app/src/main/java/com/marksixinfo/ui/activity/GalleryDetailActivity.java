@@ -27,6 +27,7 @@ import com.marksixinfo.ui.fragment.PictureDetailsFragment;
 import com.marksixinfo.utils.CommonUtils;
 import com.marksixinfo.utils.UIUtils;
 import com.marksixinfo.widgets.CommonNavigator;
+import com.marksixinfo.widgets.LoadingLayout;
 import com.marksixinfo.widgets.MarkSixNavigatorAdapter;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -58,6 +59,8 @@ public class GalleryDetailActivity extends MarkSixActivity implements View.OnCli
     ViewPager picture_view_pager;
     private List<PageBaseFragment> mDataList;
 
+    @BindView(R.id.loading)
+    LoadingLayout mLoadingLayout;
     private OptionsPickerView pvCustomOptions;
 
     private List<String> classify;
@@ -103,7 +106,7 @@ public class GalleryDetailActivity extends MarkSixActivity implements View.OnCli
     @Override
     public void afterViews() {
         //markSixTitle.init("", "", "发布图解", 0, this);
-        markSixTitle.init("", "", "", 0, this);
+        markSixTitle.init("图库详情", "", "", 0, this);
         galleryId = getStringParam(StringConstants.ID);
         periodId = getStringParam(StringConstants.PERIOD);
         String position = getStringParam(StringConstants.POSITION);
@@ -112,6 +115,15 @@ public class GalleryDetailActivity extends MarkSixActivity implements View.OnCli
         if (!TextUtils.isEmpty(galleryId))
             getAllPeriods(galleryId, 0);
 
+        mLoadingLayout.setRetryListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mLoadingLayout.showLoading();
+                if (!TextUtils.isEmpty(galleryId))
+                    getAllPeriods(galleryId, 0);
+
+            }
+        });
         getSelectPicture(false);
     }
 
@@ -146,13 +158,19 @@ public class GalleryDetailActivity extends MarkSixActivity implements View.OnCli
         new GalleryImpl(new MarkSixNetCallBack<List<PeriodData>>(this, PeriodData.class) {
             @Override
             public void onSuccess(List<PeriodData> response, int id) {
+                mLoadingLayout.showContent();
                 if (response != null) {
                     if (response.size() > 0)
                         setViewPage(response);
                 }
             }
 
-        }.setNeedDialog(true)).getAllPictrue(id, yera);
+            @Override
+            public void onError(String msg, String code) {
+                //super.onError(msg, code);
+                mLoadingLayout.showError();
+            }
+        }.setNeedDialog(false)).getAllPictrue(id, yera);
     }
 
     /**
@@ -363,6 +381,7 @@ public class GalleryDetailActivity extends MarkSixActivity implements View.OnCli
         new GalleryImpl(new MarkSixNetCallBack<List<SelectPictureData>>(this, SelectPictureData.class) {
             @Override
             public void onSuccess(List<SelectPictureData> response, int id) {
+               // mLoadingLayout.showContent();
                 if (response != null) {
                     responseData = response;
                     if (isShow)
@@ -370,6 +389,12 @@ public class GalleryDetailActivity extends MarkSixActivity implements View.OnCli
                 }
             }
 
+            @Override
+            public void onError(String ms, String code) {
+             //   super.onError(msg, code);
+
+            }
         }.setNeedDialog(isShow)).getSelectPeriod();
     }
+
 }

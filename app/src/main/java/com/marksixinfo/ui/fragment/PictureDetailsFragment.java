@@ -424,7 +424,9 @@ public class PictureDetailsFragment extends PageBaseFragment implements BackInpu
         collerTv = topListView.findViewById(R.id.tv_collect);
         viewPraise = topListView.findViewById(R.id.view_praise);
         this.titleName = response.getTitle();
-        titleTv.setText(this.titleName);
+
+       String prriods =  period.substring(period.length()-3,period.length());
+        titleTv.setText("第"+prriods+"期"+this.titleName);
         addTimeTv.setText(response.getAdd_Time());
         viewNumTv.setText(response.getView_Num() + "");
         //  GlideUtil.loadImage(response.getPic(), viewPictrueIv);
