@@ -30,9 +30,11 @@ import com.marksixinfo.utils.ActivityManager;
 import com.marksixinfo.utils.CommonUtils;
 import com.marksixinfo.utils.EventBusUtil;
 import com.marksixinfo.utils.NotificationUtils;
+import com.marksixinfo.utils.SPUtil;
 import com.marksixinfo.widgets.EditionDialog;
 import com.marksixinfo.widgets.LotteryRemindDialog;
 import com.marksixinfo.widgets.NoAnimationViewPager;
+import com.zhangke.websocket.WebSocketHandler;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
@@ -203,10 +205,21 @@ public class MainActivity extends MarkSixActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (exitBy2Click(this)) {// 调用双击退出函数
+                setRealLottery();
                 finish();
             }
         }
         return false;
+    }
+
+    /**
+     * 实时开奖中双击退出断开连接,下次启动重连
+     */
+    private void setRealLottery() {
+        String value = SPUtil.getStringValue(getContext(), SPUtil.LOTTERY_CURRENT);
+        if (CommonUtils.StringNotNull(value)) {
+            WebSocketHandler.getDefault().disConnect();
+        }
     }
 
     /**

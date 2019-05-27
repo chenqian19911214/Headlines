@@ -49,7 +49,7 @@ public class StartActivity extends ActivityBase {
         UIUtils.hideBottomUIMenu(this);
         initLotteryConfig();
         WebSocketHandler.getDefault().addListener(socketListener);
-
+        WebSocketHandler.getDefault().reconnect();//手动重连
 //        ivBackground.postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
@@ -62,7 +62,7 @@ public class StartActivity extends ActivityBase {
 //        }, NumberConstants.START_TIME);
 
 //        initInfo();
-        CommonUtils.setCurrentLottery(getApplicationContext(), "");
+//        CommonUtils.setCurrentLottery(getApplicationContext(), "");
 
 //        CommonUtils.setCurrentLottery(getApplicationContext(),
 //                "{\"period\":\"2019057\",\"open\":1,\"lottery\":[\"43\",\"13\",\"11\",\"17\",\"33\",\"14\",\"27\"]}");

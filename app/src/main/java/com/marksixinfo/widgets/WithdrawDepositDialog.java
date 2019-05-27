@@ -1,7 +1,5 @@
 package com.marksixinfo.widgets;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -14,6 +12,8 @@ import android.widget.TextView;
 
 import com.marksixinfo.R;
 import com.marksixinfo.base.DialogBase;
+import com.marksixinfo.base.IntentUtils;
+import com.marksixinfo.constants.UrlStaticConstants;
 import com.marksixinfo.interfaces.ActivityIntentInterface;
 import com.marksixinfo.utils.CommonUtils;
 import com.marksixinfo.utils.EmojiFilter;
@@ -164,9 +164,7 @@ public class WithdrawDepositDialog extends DialogBase {
      * 跳转优7
      */
     private void startUrl() {
-        Uri uri = Uri.parse("https://www.u7996.com");
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        getCtrl().getActivity().startActivity(intent);
+        IntentUtils.gotoDefaultWeb(getCtrl(), UrlStaticConstants.YOU_SEVEN);
         dismiss();
     }
 }

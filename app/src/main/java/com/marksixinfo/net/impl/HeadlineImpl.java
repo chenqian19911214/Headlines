@@ -230,9 +230,10 @@ public class HeadlineImpl extends NetManagerBase implements HeadlineApi {
      * @date: 2019/3/22 0022 13:10
      */
     @Override
-    public void getSearchResult(String keyword, int page) {
+    public void getSearchResult(String keyword, int page,String period) {
         HashMap<String, String> params = new HashMap<>();
         BaseNetUtil.putStringParams(params, PAGE, String.valueOf(page));
+        BaseNetUtil.putStringParams(params, PERIOD, period);
         try {
             String encode = URLEncoder.encode(keyword, "utf-8");
             BaseNetUtil.putStringParams(params, KEYWORD, encode);

@@ -132,7 +132,7 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
                             public void onEnd() {
                                 if (type == 1) {
                                     startLottery();
-                                }
+                            }
                             }
                         });
                     }

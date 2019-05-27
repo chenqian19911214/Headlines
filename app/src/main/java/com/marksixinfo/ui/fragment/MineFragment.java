@@ -1,5 +1,6 @@
 package com.marksixinfo.ui.fragment;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -196,12 +197,14 @@ public class MineFragment extends PageBaseFragment implements View.OnClickListen
      * 显示错误页
      */
     private void showError() {
-        assert getContext() != null;
-        mLoadingLayout.setErrorText(getContext().getResources().getString(R.string.no_network));
-        mLoadingLayout.setErrorImage(R.drawable.no_network);
-        mLoadingLayout.setRetryText(getContext().getResources().getString(R.string.reload_button));
-        mLoadingLayout.setRetryListener(this);
-        mLoadingLayout.showError();
+        Context context = getContext();
+        if (context != null) {
+            mLoadingLayout.setErrorText(context.getResources().getString(R.string.no_network));
+            mLoadingLayout.setErrorImage(R.drawable.no_network);
+            mLoadingLayout.setRetryText(context.getResources().getString(R.string.reload_button));
+            mLoadingLayout.setRetryListener(this);
+            mLoadingLayout.showError();
+        }
     }
 
 

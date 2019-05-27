@@ -74,4 +74,10 @@ public interface UrlStaticConstants {
      *  注册免责声明
      */
     String REGISTER_DISCLAIMER = "http://m.lhtt.co/?c=rule&a=term&device=android";
+
+
+    /**
+     * 任务中心提现跳转优7网址
+     */
+    String YOU_SEVEN= "https://www.u7996.com";
 }

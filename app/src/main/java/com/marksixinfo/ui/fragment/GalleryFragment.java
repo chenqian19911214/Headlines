@@ -34,7 +34,7 @@ public class GalleryFragment extends PageBaseFragment implements SucceedCallBack
 
     @Override
     protected void afterViews() {
-        richWebViewUtil = new RichWebViewUtil();
+        richWebViewUtil = new RichWebViewUtil(this);
         richWebViewUtil.setWebSetting(webView, this);
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override

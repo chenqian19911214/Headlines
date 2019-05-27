@@ -12,6 +12,7 @@ import android.text.TextUtils;
 
 import com.marksixinfo.R;
 import com.marksixinfo.bean.HashMapEntity;
+import com.marksixinfo.interfaces.ActivityIntentInterface;
 import com.marksixinfo.utils.CommonUtils;
 import com.marksixinfo.utils.LogUtils;
 
@@ -70,6 +71,21 @@ public class IntentUtils {
         }
         return null;
     }
+
+    /**
+     * 跳转默认浏览器
+     *
+     * @param context
+     * @param url     需要打开的网址
+     */
+    public static void gotoDefaultWeb(ActivityIntentInterface context, String url) {
+        if (context != null && context.getActivity() != null) {
+            Uri uri = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            context.getActivity().startActivity(intent);
+        }
+    }
+
 
     /**
      * 获取对应的 Activity信息，多个返回第一个

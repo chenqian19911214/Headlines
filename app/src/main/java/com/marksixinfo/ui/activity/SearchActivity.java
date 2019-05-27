@@ -20,6 +20,7 @@ import com.marksixinfo.bean.HistoryData;
 import com.marksixinfo.bean.ReleaseSelectData;
 import com.marksixinfo.constants.NumberConstants;
 import com.marksixinfo.constants.StringConstants;
+import com.marksixinfo.interfaces.SucceedCallBackListener;
 import com.marksixinfo.net.impl.HeadlineImpl;
 import com.marksixinfo.ui.fragment.SearchResultFragment;
 import com.marksixinfo.ui.fragment.SearchStartFragment;
@@ -66,7 +67,7 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
     private List<ReleaseSelectData> period = new ArrayList<>();
     private List<String> periodString = new ArrayList<>();
     private ViewGroup.MarginLayoutParams params;
-    private String currentPeriod = "";
+    private String currentPeriod = "0";
 
     @Override
     public int getViewId() {
@@ -115,6 +116,7 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
     private void handleKeyWord(String string) {
         keyword = string;
         if (!CommonUtils.StringNotNull(keyword)) {
+            flSelectPeriod.setVisibility(View.GONE);
             goToStart();
         }
     }
@@ -171,7 +173,7 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
             index = 1;
         } else {
             if (searchResultFragment != null) {
-                searchResultFragment.startData(keyword, false);
+                searchResultFragment.startData(keyword, currentPeriod, false);
                 saveHistory();
             }
             return;
@@ -179,8 +181,16 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
         saveHistory();
         mEditTextView.setCursorVisible(false);
         searchResultFragment = new SearchResultFragment();
+        searchResultFragment.setListener(new SucceedCallBackListener() {
+            @Override
+            public void succeedCallBack(Object o) {
+                //请求完成
+                flSelectPeriod.setVisibility(View.GONE);
+            }
+        });
         Bundle bundle = new Bundle();
         bundle.putString(StringConstants.SEARCH_KEYWORD, keyword);
+        bundle.putString(StringConstants.PERIOD, currentPeriod);
         searchResultFragment.setArguments(bundle);
         getSupportFragmentManager()
                 .beginTransaction()
@@ -216,6 +226,7 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
                 if (CommonUtils.StringNotNull(hint)) {
                     keyword = hint;
                     mEditTextView.setText(keyword);
+                    flSelectPeriod.setVisibility(View.GONE);
                     mEditTextView.setSelection(keyword.length());
                 }
             }
@@ -299,6 +310,7 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (index == 1 && mEditTextView != null) {
                 mEditTextView.setText("");
+                flSelectPeriod.setVisibility(View.GONE);
             } else {
                 finish();
             }
@@ -325,6 +337,7 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
             case R.id.tv_cancel:
                 if (CommonUtils.StringNotNull(keyword)) {
                     mEditTextView.setText("");
+                    flSelectPeriod.setVisibility(View.GONE);
                 } else {
                     finish();
                 }
@@ -353,10 +366,11 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
      */
     private void setAllPeriod(List<String> response) {
         if (response != null) {
-            if (!response.equals(periodString)) {
-                periodString = response;
+            if (!CommonUtils.ListNotNull(periodString)) {
                 autoFlowLayout.removeAllViews();
                 period.clear();
+                periodString.addAll(response);
+                periodString.add(0, "0");
                 period.add(new ReleaseSelectData("0", "全部", true));
                 for (String s : response) {
                     if (CommonUtils.StringNotNull(s)) {
@@ -432,7 +446,7 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
                 }
             }
             textView.setTextColor(0xfffc5c66);
-            currentPeriod = periodString.get(position + 1);//多一个全部
+            currentPeriod = periodString.get(position);
             String name = period.get(position).getName();
             tvSelectPeriod.setText(name);
             if (index == 1) {//如果是搜索结果页,直接搜索

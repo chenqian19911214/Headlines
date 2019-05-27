@@ -8,7 +8,9 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.marksixinfo.interfaces.ActivityIntentInterface;
 import com.marksixinfo.interfaces.SucceedCallBackListener;
+import com.marksixinfo.utils.LogUtils;
 
 /**
  * @Auther: Administrator
@@ -19,12 +21,11 @@ public class MyWebViewClient extends WebViewClient {
 
 
     SucceedCallBackListener listener;
+    ActivityIntentInterface context;
 
-    public MyWebViewClient() {
-    }
-
-    public MyWebViewClient(SucceedCallBackListener listener) {
+    public MyWebViewClient(ActivityIntentInterface context, SucceedCallBackListener listener) {
         this.listener = listener;
+        this.context = context;
     }
 
     @Override
@@ -62,7 +63,13 @@ public class MyWebViewClient extends WebViewClient {
 
     @Override
     public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
-        view.loadUrl(url);
+//        view.loadUrl(url);
+        LogUtils.d("UrlLoading=" + url);
+        if (null == url) {
+            return false;
+        }
+        //拦截url跳转默认浏览器
+        IntentUtils.gotoDefaultWeb(context, url);
         return true;
     }
 }

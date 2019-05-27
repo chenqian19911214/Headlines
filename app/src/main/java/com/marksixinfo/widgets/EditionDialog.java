@@ -1,14 +1,13 @@
 package com.marksixinfo.widgets;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.marksixinfo.R;
 import com.marksixinfo.base.DialogBase;
+import com.marksixinfo.base.IntentUtils;
 import com.marksixinfo.bean.EditionNameDate;
 import com.marksixinfo.interfaces.ActivityIntentInterface;
 
@@ -70,11 +69,7 @@ public class EditionDialog extends DialogBase implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.tv_ok:
                 if (!TextUtils.isEmpty(dowUrl)) {
-                    Intent intent = new Intent();
-                    intent.setAction("android.intent.action.VIEW");
-                    Uri content_url = Uri.parse(dowUrl);
-                    intent.setData(content_url);
-                    context.getActivity().startActivity(intent);
+                    IntentUtils.gotoDefaultWeb(getCtrl(), dowUrl);
                 }
 
                 break;

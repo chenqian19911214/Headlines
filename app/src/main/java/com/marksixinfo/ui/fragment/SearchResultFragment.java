@@ -62,10 +62,12 @@ public class SearchResultFragment extends MarkSixFragment implements IMainHomeRe
     private SearchResultAdapter adapter;
     private int pageIndex = 0;//页数
     private String keyword = "";
-    private String currentPeriod = "";
+    private String currentPeriod = "0";
     private SearchUserAdapter userAdapter;
     private List<MineConcernData> user;
     private LinearLayout llData;
+    private SucceedCallBackListener listener;
+
 
     @Override
     public int getViewId() {
@@ -78,6 +80,7 @@ public class SearchResultFragment extends MarkSixFragment implements IMainHomeRe
         Bundle bundle = getArguments();
         if (bundle != null) {
             keyword = bundle.getString(StringConstants.SEARCH_KEYWORD);
+            currentPeriod = bundle.getString(StringConstants.PERIOD);
         }
 
         View headView = View.inflate(getContext(), R.layout.head_view_search_user, null);
@@ -102,7 +105,7 @@ public class SearchResultFragment extends MarkSixFragment implements IMainHomeRe
             }
         });
 
-        startData(keyword, true);
+        startData(keyword, currentPeriod, true);
     }
 
     /**
@@ -124,14 +127,16 @@ public class SearchResultFragment extends MarkSixFragment implements IMainHomeRe
     /**
      * 开始加载
      *
-     * @param keyword 搜索词
+     * @param keyword       搜索词
+     * @param currentPeriod 期数
      */
-    public void startData(String keyword, boolean isInit) {
+    public void startData(String keyword, String currentPeriod, boolean isInit) {
         SearchActivity activity = (SearchActivity) getActivity();
         if (activity != null) {
             activity.getEditTextView().setCursorVisible(false);
         }
         this.keyword = keyword;
+        this.currentPeriod = currentPeriod;
         if (listView != null) {
             listView.setSelection(0);
         }
@@ -173,7 +178,7 @@ public class SearchResultFragment extends MarkSixFragment implements IMainHomeRe
                 super.onAfter(id);
                 loadDone(isRefresh);
             }
-        }.setNeedDialog(false)).getSearchResult(keyword, ++pageIndex);
+        }.setNeedDialog(false)).getSearchResult(keyword, ++pageIndex, currentPeriod);
     }
 
     /**
@@ -202,6 +207,9 @@ public class SearchResultFragment extends MarkSixFragment implements IMainHomeRe
      * 请求完成
      */
     private void loadDone(boolean isRefresh) {
+        if (listener != null) {
+            listener.succeedCallBack(null);
+        }
         if (refreshLayout != null) {
             if (isRefresh) {
                 refreshLayout.finishRefresh();
@@ -456,7 +464,7 @@ public class SearchResultFragment extends MarkSixFragment implements IMainHomeRe
     @Override
     public void onClick(View view) {
         mLoadingLayout.showLoading();
-        startData(keyword, true);
+        startData(keyword, currentPeriod, true);
     }
 
     /**
@@ -505,6 +513,10 @@ public class SearchResultFragment extends MarkSixFragment implements IMainHomeRe
                         StringConstants.DATA_LIST, JSONUtils.toJson(user)}));
             }
         }
+    }
+
+    public void setListener(SucceedCallBackListener listener) {
+        this.listener = listener;
     }
 }
 

@@ -158,7 +158,7 @@ public class DetailActivity extends MarkSixActivity implements
 
         markSixTitle.init("", "");
 
-        richWebViewUtil = new RichWebViewUtil();
+        richWebViewUtil = new RichWebViewUtil(this);
 
         /**********headView*********/
         View headView = View.inflate(this, R.layout.head_view_detail, null);

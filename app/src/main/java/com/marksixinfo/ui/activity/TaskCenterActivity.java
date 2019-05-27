@@ -330,6 +330,11 @@ public class TaskCenterActivity extends MarkSixWhiteActivity implements
                     toast("没有金币可以兑换,快去做任务赚取金币吧");
                     return;
                 }
+                if (NumberUtils.stringToInt(gold) < exchange_ratio) {
+                    toast("当前最小兑换金币个数为" + exchange_ratio + "个");
+                    return;
+                }
+
                 int goldNumber = NumberUtils.stringToInt(gold);
                 CommonInputDialog commonInputDialog = new CommonInputDialog(this);
                 EditText editText = commonInputDialog.getEditText();
@@ -360,13 +365,19 @@ public class TaskCenterActivity extends MarkSixWhiteActivity implements
                         }
                     }
                 });
-                commonInputDialog.show("任务金币" + exchange_ratio + "：1兑换现金余额", "请输入兑换金币数量", "取消", "确定", null, new View.OnClickListener() {
+                commonInputDialog.show("任务金币" + exchange_ratio + "：1兑换现金余额",
+                        "请输入兑换金币数量", "取消", "确定", null, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        String inputContent = commonInputDialog.getInputContent();
+                        if (NumberUtils.stringToInt(inputContent) < exchange_ratio) {
+                            toast("当前最小兑换金币个数为" + exchange_ratio + "个");
+                            return;
+                        }
                         if (commonInputDialog.isShowing()) {
                             commonInputDialog.dismiss();
                         }
-                        conversionGold(commonInputDialog.getInputContent());
+                        conversionGold(inputContent);
                     }
                 });
                 break;

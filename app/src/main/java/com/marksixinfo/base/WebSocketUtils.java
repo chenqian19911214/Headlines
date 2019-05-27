@@ -22,7 +22,9 @@ public class WebSocketUtils {
      */
 //    private static String connectUrl = "ws://121.40.165.18:8800";
 //    private static String connectUrl = "wss://echo.websocket.org/";
-    private static String connectUrl = "wss://www.sskk58.com:9200?type=lottery";
+    //线上
+//    private static String connectUrl = "wss://www.sskk58.com:9200?type=lottery";
+    private static String connectUrl = "wss://images.34399.com:9200?type=lottery";
 
     /**
      * 超时时间 毫秒

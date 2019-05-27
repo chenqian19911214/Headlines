@@ -1,5 +1,6 @@
 package com.marksixinfo.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
@@ -369,24 +370,28 @@ public class ForumListFragment extends PageBaseFragment implements View.OnClickL
      * 登录页
      */
     private void showEmpty() {
-        assert getContext() != null;
-        mLoadingLayout.setErrorText(getContext().getResources().getString(R.string.no_login));
-        mLoadingLayout.setErrorImage(R.drawable.no_data);
-        mLoadingLayout.setRetryText(getContext().getResources().getString(R.string.right_login));
-        mLoadingLayout.setRetryListener(this);
-        mLoadingLayout.showError();
+        Context context = getContext();
+        if (context != null) {
+            mLoadingLayout.setErrorText(context.getResources().getString(R.string.no_login));
+            mLoadingLayout.setErrorImage(R.drawable.no_data);
+            mLoadingLayout.setRetryText(context.getResources().getString(R.string.right_login));
+            mLoadingLayout.setRetryListener(this);
+            mLoadingLayout.showError();
+        }
     }
 
     /**
      * 错误页
      */
     private void showError() {
-        assert getContext() != null;
-        mLoadingLayout.setErrorText(getContext().getResources().getString(R.string.no_network));
-        mLoadingLayout.setErrorImage(R.drawable.no_network);
-        mLoadingLayout.setRetryText(getContext().getResources().getString(R.string.reload_button));
-        mLoadingLayout.setRetryListener(this);
-        mLoadingLayout.showError();
+        Context context = getContext();
+        if (context != null) {
+            mLoadingLayout.setErrorText(context.getResources().getString(R.string.no_network));
+            mLoadingLayout.setErrorImage(R.drawable.no_network);
+            mLoadingLayout.setRetryText(context.getResources().getString(R.string.reload_button));
+            mLoadingLayout.setRetryListener(this);
+            mLoadingLayout.showError();
+        }
     }
 
     /**

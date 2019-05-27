@@ -356,8 +356,8 @@ public class LotteryChartFragment extends PageBaseFragment implements
      */
     @Override
     public void changeSelect(int oldPosition, int newPosition) {
-        if (oldPosition == type && !oldNumber
-                .equals(editPeriod.getText().toString().trim().replace("期", ""))) {
+        if (oldPosition == type && editPeriod != null
+                && !oldNumber.equals(editPeriod.getText().toString().trim().replace("期", ""))) {
             editPeriod.setText(oldNumber + "期");
         }
         editPeriod.setFocusableInTouchMode(false);

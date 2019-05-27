@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 @SuppressLint("SimpleDateFormat")
 public class DateUtils {
@@ -101,6 +102,7 @@ public class DateUtils {
 
     public static String covertDateToString(long date, String format) {
         DateFormat dateFormat = new SimpleDateFormat(format);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
         return dateFormat.format(new Date(date));
     }
 

@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import com.marksixinfo.base.MyWebViewClient;
 import com.marksixinfo.bean.ClientInfo;
 import com.marksixinfo.evenbus.LoginSuccessEvent;
+import com.marksixinfo.interfaces.ActivityIntentInterface;
 import com.marksixinfo.interfaces.OnItemClickListener;
 import com.marksixinfo.interfaces.SucceedCallBackListener;
 import com.marksixinfo.utils.EventBusUtil;
@@ -23,6 +24,12 @@ import com.marksixinfo.utils.SPUtil;
  */
 public class RichWebViewUtil {
 
+
+    ActivityIntentInterface context;
+
+    public RichWebViewUtil(ActivityIntentInterface context) {
+        this.context = context;
+    }
 
     public void setWebDestroy(WebView webView) {
         if (webView != null) {
@@ -55,7 +62,7 @@ public class RichWebViewUtil {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
-        webView.setWebViewClient(new MyWebViewClient(listener));
+        webView.setWebViewClient(new MyWebViewClient(context, listener));
         webView.setWebChromeClient(new WebChromeClient());
     }
 

@@ -133,11 +133,11 @@ public interface HeadlineApi {
     /**
      * 功能描述: 搜索
      *
-     * @param: 搜索关键字, 页码
+     * @param: 搜索关键字, 页码,期数
      * @auther: Administrator
      * @date: 2019/3/22 0022 13:10
      */
-    void getSearchResult(String keyword, int page);
+    void getSearchResult(String keyword, int page, String period);
 
     /**
      * 功能描述: 搜索获取期数
@@ -146,7 +146,6 @@ public interface HeadlineApi {
      * @date: 2019/3/22 0022 13:10
      */
     void getSearchPeriod();
-
 
 
     /**
