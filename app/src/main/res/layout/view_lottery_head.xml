@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="374dp"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="364dp"
+        android:background="#fff"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_period_number_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#ff333333"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    tools:text="aaa第2019025期" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:text="(下期开奖 "
+                    android:textColor="#CC3110"
+                    android:textSize="12dp" />
+
+                <com.marksixinfo.widgets.LotteryNextTimeDownView
+                    android:id="@+id/tv_next_lottery_time_down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text=")"
+                    android:textColor="#CC3110"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2dp"
+                android:text="咪"
+                android:textColor="#ff666666"
+                android:textSize="12dp" />
+
+
+            <com.marksixinfo.widgets.SwitchButton
+                android:id="@+id/SwitchButton_lottery"
+                style="@style/SwitchButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="-2dp"
+                android:layout_marginLeft="-8dp"
+                android:layout_marginRight="-12dp"
+                app:kswBackDrawable="@drawable/ios_back_drawable"
+                app:kswThumbDrawable="@drawable/ios_thumb_selector"
+                app:kswThumbMarginBottom="-5.5dp"
+                app:kswThumbMarginLeft="-4dp"
+                app:kswThumbMarginRight="-4dp"
+                app:kswThumbMarginTop="-2dp"
+                app:kswThumbRangeRatio="1.8" />
+
+        </LinearLayout>
+
+        <com.marksixinfo.widgets.LotteryCurrentNumber
+            android:id="@+id/LotteryCurrentView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:text="历史开奖期数"
+                android:textColor="#ff333333"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_current_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="11dp"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/icon_pull_gray2"
+                android:padding="5dp"
+                android:text="2019年"
+                android:textColor="#ff999999"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
+
+
+        <View
+            style="@style/line_vertical"
+            android:layout_marginTop="12dp" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+
+            <Button
+                android:id="@+id/btn_up_page"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/selector_lottery_left"
+                android:enabled="false" />
+
+            <Button
+                android:id="@+id/btn_next_page"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/selector_lottery_right"
+                android:enabled="false" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:horizontalSpacing="10dp"
+                android:padding="10dp"
+                android:scrollbars="none"
+                android:verticalSpacing="10dp" />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        style="@style/line_vertical"
+        android:layout_height="10dp" />
+</LinearLayout>

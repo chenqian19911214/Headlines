@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="1dp"
+    android:layout_marginRight="6dp"
+    android:orientation="horizontal">
+
+
+    <include
+        android:id="@+id/view_v1"
+        layout="@layout/item_lottery_head_current" />
+
+    <include
+        android:id="@+id/view_v2"
+        layout="@layout/item_lottery_head_current" />
+
+    <include
+        android:id="@+id/view_v3"
+        layout="@layout/item_lottery_head_current" />
+
+    <include
+        android:id="@+id/view_v4"
+        layout="@layout/item_lottery_head_current" />
+
+    <include
+        android:id="@+id/view_v5"
+        layout="@layout/item_lottery_head_current" />
+
+    <include
+        android:id="@+id/view_v6"
+        layout="@layout/item_lottery_head_current" />
+
+
+    <ImageView
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:padding="8dp"
+        android:src="@drawable/icon_lottery_jiahao" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginTop="0dp">
+
+
+        <include
+            android:id="@+id/view_v7"
+            layout="@layout/item_lottery_head_current"
+            android:visibility="invisible" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_scratch"
+            android:layout_width="43dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="4dp"
+            app:cardMaxElevation="4dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#88898b"
+                android:gravity="center"
+                android:text="刮开"
+                android:textColor="#fff"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+</LinearLayout>

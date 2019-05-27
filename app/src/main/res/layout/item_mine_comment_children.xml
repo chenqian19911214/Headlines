@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text=""
+            android:textColor="#393939"
+            android:textSize="14dp" />
+
+
+        <com.marksixinfo.widgets.ninegridimg.NineGridImageView
+            android:id="@+id/pa_LinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            app:imgGap="3dp"
+            app:showStyle="fill"
+            tools:visibility="gone" />
+
+
+    </LinearLayout>
+
+
+    <com.marksixinfo.widgets.SwipeMenuLayout
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:ios="true"
+        app:leftSwipe="true"
+        app:swipeEnable="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tv_my_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="我回复的："
+                android:textColor="#999"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/tv_comment_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:maxLines="5"
+                android:text=""
+                android:textColor="#393939"
+                android:textSize="14dp" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="#F13838"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="#fff"
+            android:textSize="15dp" />
+
+
+    </com.marksixinfo.widgets.SwipeMenuLayout>
+
+</LinearLayout>

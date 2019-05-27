@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp">
+
+
+        <ImageView
+            android:id="@+id/iv_user_photo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/icon_default_photo" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_Nickname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/tv_Nickname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="天天好彩"
+                            android:textColor="#ff666666"
+                            android:textSize="15dp" />
+
+
+                        <ImageView
+                            android:id="@+id/iv_official"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:src="@drawable/icon_official"
+                            android:visibility="invisible"
+                            tools:visibility="visible" />
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ll_Nickname"
+                        android:text="10分钟前"
+                        android:textColor="#ff999999"
+                        android:textSize="12dp" />
+
+
+                </RelativeLayout>
+
+                <com.marksixinfo.widgets.ConcernTextView
+                    android:id="@+id/tv_concern"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp" />
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="22dp"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="#ff222222"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                tools:text="本站永久域名：www.6331.com 敬请收藏" />
+
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="22dp"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:lineSpacingExtra="3dp"
+                android:maxLines="3"
+                android:text="030期：香港正牌挂牌挂牌：07九肖：兔、猴、牛、马、兔、猴、牛、马、兔、猴、牛、马、兔、猴、牛、马、兔、猴、牛、马、兔、猴、牛、马、龙、狗、马、..."
+                android:textColor="#ff333333"
+                android:textSize="15dp" />
+
+
+            <com.marksixinfo.widgets.ninegridimg.NineGridImageView
+                android:id="@+id/pa_LinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:imgGap="3dp"
+                app:isRounded="true"
+                app:showStyle="fill"
+                tools:visibility="gone" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/icon_comment_forum"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    android:paddingRight="40dp"
+                    android:text="111"
+                    android:textColor="#999"
+                    android:textSize="12dp" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:id="@+id/view_praise"
+                        style="@style/view_placeholder"
+                        android:layout_centerInParent="true" />
+
+                    <TextView
+                        android:id="@+id/tv_praise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:drawableLeft="@drawable/praise_uncheck_forum"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="50dp"
+                        android:text="aaa33222"
+                        android:textColor="#999"
+                        android:textSize="12dp" />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_comment_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+
+                <View
+                    android:id="@+id/view_line"
+                    android:layout_width="1.5dp"
+                    android:layout_height="match_parent"
+                    android:background="#ddd" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
+
+                    <TextView
+                        android:id="@+id/tv_comment_one"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="fgjfgjty"
+                        android:textColor="#ff333333"
+                        android:textSize="13dp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tv_comment_two"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="sdgsdgsdfghfdh"
+                        android:textColor="#ff333333"
+                        android:textSize="13dp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tv_start_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/icon_forum_edit"
+                        android:drawablePadding="5dp"
+                        android:paddingBottom="20dp"
+                        android:paddingTop="4dp"
+                        android:text="评论一下..."
+                        android:textColor="#ff999999"
+                        android:textSize="13dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

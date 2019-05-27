@@ -1,0 +1,35 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:10.1.0'
+
+        classpath "com.tencent.bugly:tinker-support:1.1.5" //bugly
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+        // 如果添加依赖时，报找不到项目时（则项目正在审核），可以添加此句maven地址，如果找到项目，可不必添加
+        maven { url "https://dl.bintray.com/albertlii/android-maven/" }
+//        maven { url 'https://dl.bintray.com/umsdk/release' }
+
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

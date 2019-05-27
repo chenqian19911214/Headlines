@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
+
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="0.5dp"
+        android:layout_height="15dp"
+        android:background="#fff4f5f7" />
+
+
+    <TextView
+        android:id="@+id/tv_keyword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="第27期六合必中四肖"
+        android:textColor="#ff323232"
+        android:textSize="14dp" />
+
+
+</LinearLayout>

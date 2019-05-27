@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--system-->
+    <string name="scheme">marksix</string>
+    <string name="action">android.intent.action.VIEW</string>
+    <string name="category">android.intent.category.DEFAULT</string>
+    <string name="loginTag">isNeedLogin</string>
+    <string name="thisHost">thisHost</string>
+    <string name="nextHost">nextHost</string>
+    <string name="jsonBundle">jsonBundle</string>
+    <string name="thisUrl">thisHostUrl</string>
+    <string name="nextUrl">nextHostUrl</string>
+    <!--system-->
+    <!--首页-->
+    <string name="MainActivity">main</string>
+    <!--搜索-->
+    <string name="SearchActivity">search</string>
+    <!--头条发布-->
+    <string name="ReleaseActivity">release</string>
+    <!--帖子详情-->
+    <string name="DetailActivity">detail</string>
+    <!--选择分类-->
+    <string name="SelectClassifyActivity">selectClassify</string>
+    <!--登录-->
+    <string name="LoginActivity">login</string>
+    <!--注册-->
+    <string name="RegisterActivity">register</string>
+    <!--他人详情页-->
+    <string name="UserPostCenterActivity">userPostCenter</string>
+    <!--回复列表页-->
+    <string name="CommentListActivity">commentList</string>
+    <!--个人设置页-->
+    <string name="SettingActivity">setting</string>
+    <!--个人中心,我的回复-->
+    <string name="MineCommentActivity">mineComment</string>
+    <!--个人中心,我的关注-->
+    <string name="MineConcernActivity">mineConcern</string>
+    <!--个人中心,我的收藏-->
+    <string name="MineCollectActivity">mineCollect</string>
+    <!--个人中心,我的头条-->
+    <string name="MineHeadlineActivity">mineHeadline</string>
+    <!--论坛,高手帖更多-->
+    <string name="ForumMoreListActivity">forumMoreList</string>
+    <!--论坛帖子详情-->
+    <string name="ForumDetailActivity">forumDetail</string>
+    <!--论坛帖子发布-->
+    <string name="ForumReleaseActivity">forumRelease</string>
+    <!--论坛用户中心-->
+    <string name="ForumUserActivity">ForumUser</string>
+    <!--论坛 - 我的帖子-->
+    <string name="MineInvitationActivity">mineInvitation</string>
+    <!--通用 webView-->
+    <string name="WebViewActivity">webView</string>
+    <!--忘记密码找回-->
+    <string name="ForgetPassWordActivity">forgetPassWord</string>
+    <!--任务中心-->
+    <string name="TaskCenterActivity">taskCenter</string>
+    <!--提现兑换-->
+    <string name="WithdrawDepositActivity">withdrawDeposit</string>
+    <!--收益记录-->
+    <string name="IncomeRecordActivity">incomeRecord</string>
+    <!--邀请好友-->
+    <string name="InviteFriendsActivity">inviteFriends</string>
+    <!--好友列表-->
+    <string name="FriendsListActivity">friendsList</string>
+    <!--我的关注与粉丝-->
+    <string name="MineConcernAndFansActivity">concernAndFans</string>
+    <!--我的收藏/评论/点赞/历史-->
+    <string name="MineConcernAndHistoryActivity">concernAndHistory</string>
+    <!--消息通知-->
+    <string name="MessageNotificationActivity">messageNotification</string>
+    <!--用户反馈-->
+    <string name="FeedbackActivity">feedback</string>
+    <!--修改密码-->
+    <string name="ChangePasswordActivity">changePassword</string>
+    <!--图库搜索-->
+    <string name="GallerySearchActivity">gallerySearch</string>
+    <!--图库详情-->
+    <string name="GalleryDetailActivity">galleryDetail</string>
+    <!--图解发布-->
+    <string name="GalleryExplainReleaseActivity">galleryExplainRelease</string>
+    <!--图解详情-->
+    <string name="GalleryExplainDetailActivity">galleryExplainDetail</string>
+    <!--图解小组-->
+    <string name="GraphicListActivity">graphicListDetail</string>
+    <!--图库回复列表-->
+    <string name="GalleryCommentListActivity">galleryCommentList</string>
+    <!--头条搜索更多用户-->
+    <string name="SearchUserListActivity">searchUserList</string>
+    <!--备用域名编辑-->
+    <string name="StandbyRemarkActivity">standbyRemark</string>
+
+</resources>

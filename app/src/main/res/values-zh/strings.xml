@@ -1,0 +1,6 @@
+<resources>
+
+    <!--选择图片复写-->
+    <string name="picture_completed">完成</string>
+
+</resources>

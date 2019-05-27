@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_bg"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/no_data"
+            android:gravity="center_horizontal"
+            android:text="@string/no_content"
+            android:textColor="#ffbcbcbc"
+            android:textSize="14dp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_data_content"
+        android:layout_width="match_parent"
+        android:layout_height="60.5dp"
+        android:background="#fff"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_type_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="aaaaaaa"
+                    android:textColor="#ff333333"
+                    android:textSize="16dp" />
+
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_type_name"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:text="2019-03-18 20:21"
+                    android:textColor="#ff999999"
+                    android:textSize="12dp" />
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_number_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="+666"
+                android:textColor="#fffc5c66"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+
+        <View style="@style/line_vertical" />
+
+    </LinearLayout>
+</LinearLayout>

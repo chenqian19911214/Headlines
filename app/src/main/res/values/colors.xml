@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#fc5c66</color>
+    <color name="colorPrimaryDark">#fc5c66</color>
+    <color name="colorAccent">#e3525c</color>
+
+    <color name="main_bg">#f4f5f7</color>
+    <color name="no_color">#00000000</color>
+    <color name="grey_bbb">#bbbbbb</color>
+    <color name="grey_ddd">#dddddd</color>
+    <color name="grey_69eee">#69dddddd</color>
+    <color name="grey_666">#666666</color>
+    <color name="grey_cbc">#cbcbcb</color>
+    <color name="grey_bcb">#bcbcbc</color>
+    <color name="grey_999">#999999</color>
+    <color name="grey_393">#393939</color>
+    <color name="grey_bdb">#bdbdbd</color>
+    <color name="grey_cdc">#cdcdcd</color>
+    <color name="black_333">#333333</color>
+
+
+    <color name="yellow_efa">#efa301</color>
+    <color name="yellow_ff96">#FF9600</color>
+    <color name="yellow_ffd">#FFD859</color>
+
+    <color name="bg_indicator_point_normal">#d8d8d8</color>
+    <color name="bg_indicator_point_selected">#a6a6a6</color>
+    <color name="bg_horizontal_line_color">#80a3a4a7</color>
+    <color name="bg_horizontal_btn_normal">#eeeeee</color>
+    <color name="bg_horizontal_btn_selected">#70a3a4a7</color>
+
+
+    <color name="blue_2c9">#2c91d9</color>
+    <color name="blue_d5e">#d5e9f7</color>
+    <color name="blue_2a9">#2a90d7</color>
+    <color name="blue_03a">#03ABED</color>
+
+
+    <color name="red_e71">#e71129</color>
+    <color name="blue_415">#4150b5</color>
+    <color name="green_229">#229a20</color>
+
+
+
+
+    <color name="green_31b">#31B466</color>
+    <color name="green_1db">#1DB611</color>
+
+    <color name="spark_primary_color">#FFFF5722</color>
+    <color name="spark_secondary_color">#FFFFC107</color>
+    <color name="spark_image_tint">#00000000</color>
+
+
+</resources>

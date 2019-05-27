@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="65dp"
+    android:orientation="horizontal">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_invitation"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground">
+
+
+        <TextView
+            android:id="@+id/tv_invitation_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text=""
+            android:textColor="#ff333333"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/tv_invitation_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_invitation_num"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="头条"
+            android:textColor="#ff999999"
+            android:textSize="12dp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_concern"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground">
+
+
+        <TextView
+            android:id="@+id/tv_concern_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text=""
+            android:textColor="#ff333333"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_concern_num"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="关注"
+            android:textColor="#ff999999"
+            android:textSize="12dp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_fans"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground">
+
+
+        <TextView
+            android:id="@+id/tv_fans_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text=""
+            android:textColor="#ff333333"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_fans_num"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="粉丝"
+            android:textColor="#ff999999"
+            android:textSize="12dp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_praise"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+
+        <TextView
+            android:id="@+id/tv_praise_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text=""
+            android:textColor="#ff333333"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_praise_num"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="获赞"
+            android:textColor="#ff999999"
+            android:textSize="12dp" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

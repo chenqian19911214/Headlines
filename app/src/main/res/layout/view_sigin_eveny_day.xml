@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="40dp"
+    android:layout_height="50dp">
+
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_signin" />
+
+
+        <TextView
+            android:id="@+id/tv_eveny_day1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:textColor="#ffec702e"
+            android:textSize="10sp"
+            tools:text="第一天" />
+
+
+        <TextView
+            android:id="@+id/tv_current_gold1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="4dp"
+            android:textColor="#ffffffff"
+            android:textSize="12sp"
+            tools:text="100" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_content2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_unsignin" />
+
+
+        <TextView
+            android:id="@+id/tv_eveny_day2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:textColor="#C5C5C5"
+            android:textSize="10sp"
+            tools:text="第一天" />
+
+
+        <TextView
+            android:id="@+id/tv_current_gold2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="4dp"
+            android:textColor="#ffffffff"
+            android:textSize="12sp"
+            tools:text="100" />
+
+    </FrameLayout>
+</FrameLayout>

@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
+    <com.marksixinfo.widgets.LoadingLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.marksixinfo.widgets.MySmartRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srlEnablePureScrollMode="true">
+
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:orientation="vertical">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/ll_login"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rl_mine_setting"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:orientation="horizontal"
+                                android:paddingLeft="15dp"
+                                android:paddingRight="15dp"
+                                android:paddingTop="15dp">
+
+
+                                <ImageView
+                                    android:id="@+id/iv_user_photo"
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:src="@drawable/icon_default_photo" />
+
+
+                                <LinearLayout
+                                    android:id="@+id/ll_Nickname"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="25dp"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_toRightOf="@id/iv_user_photo"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+
+                                    <TextView
+                                        android:id="@+id/tv_Nickname"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="end"
+                                        android:maxLines="1"
+                                        android:singleLine="true"
+                                        android:textColor="#333"
+                                        android:textSize="17dp"
+                                        android:textStyle="bold"
+                                        tools:text="jackma" />
+
+
+                                    <ImageView
+                                        android:id="@+id/iv_official"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="5dp"
+                                        android:ellipsize="end"
+                                        android:maxLines="1"
+                                        android:singleLine="true"
+                                        android:src="@drawable/icon_official"
+                                        android:visibility="invisible"
+                                        tools:visibility="visible" />
+
+                                </LinearLayout>
+
+
+                                <TextView
+                                    android:id="@+id/tv_user_signature"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/ll_Nickname"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_toRightOf="@id/iv_user_photo"
+                                    android:textColor="#666"
+                                    android:textSize="13dp"
+                                    tools:text="jackma" />
+
+
+                            </RelativeLayout>
+
+
+                            <include layout="@layout/view_invitation_layout" />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:background="#F5F5F5"
+                                android:orientation="horizontal">
+
+
+                                <LinearLayout
+                                    android:id="@+id/ll_user_gold"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
+
+
+                                    <ImageView
+                                        android:layout_width="26dp"
+                                        android:layout_height="22dp"
+                                        android:layout_marginLeft="20dp"
+                                        android:layout_marginTop="15dp"
+                                        android:src="@drawable/icon_user_gold" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center_vertical"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="10dp"
+                                            android:text="我的金币"
+                                            android:textColor="#ff333333"
+                                            android:textSize="11dp" />
+
+
+                                        <TextView
+                                            android:id="@+id/tv_user_gold"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="10dp"
+                                            android:maxLines="1"
+                                            android:singleLine="true"
+                                            android:text="0"
+                                            android:textColor="#ff333333"
+                                            android:textSize="15dp" />
+
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:id="@+id/ll_user_balance"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
+
+
+                                    <ImageView
+                                        android:layout_width="26dp"
+                                        android:layout_height="22dp"
+                                        android:layout_marginLeft="20dp"
+                                        android:layout_marginTop="15dp"
+                                        android:src="@drawable/icon_user_balance" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center_vertical"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="10dp"
+                                            android:text="现金余额"
+                                            android:textColor="#ff333333"
+                                            android:textSize="11dp" />
+
+
+                                        <TextView
+                                            android:id="@+id/tv_user_balance"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="10dp"
+                                            android:maxLines="1"
+                                            android:singleLine="true"
+                                            android:text="0"
+                                            android:textColor="#ff333333"
+                                            android:textSize="15dp" />
+
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_login_out"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingBottom="16dp"
+                                android:paddingTop="19dp">
+
+
+                                <com.marksixinfo.widgets.ClickImageView
+                                    android:id="@+id/iv_goto_login"
+                                    android:layout_width="128dp"
+                                    android:layout_height="128dp"
+                                    android:layout_centerInParent="true"
+                                    android:src="@drawable/icon_login_button_bg" />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:text="登录"
+                                    android:textColor="#ffffffff"
+                                    android:textSize="18dp" />
+
+
+                            </RelativeLayout>
+
+
+                            <View
+                                style="@style/line_vertical"
+                                android:layout_height="6dp" />
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+                    <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="10dp"-->
+                    <!--android:background="@color/main_bg" />-->
+
+
+                    <com.marksixinfo.widgets.MyGridView
+                        android:id="@+id/gridView_function"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:numColumns="4"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:scrollbars="none" />
+
+                    <View
+                        android:id="@+id/view_line"
+                        style="@style/line_vertical"
+                        android:layout_height="10dp" />
+
+
+                    <com.marksixinfo.widgets.MineSystemView
+                        android:id="@+id/view_system_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:name="消息通知" />
+
+                    <com.marksixinfo.widgets.MineSystemView
+                        android:id="@+id/view_system_feedback"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:name="用户反馈" />
+
+                    <com.marksixinfo.widgets.MineSystemView
+                        android:id="@+id/view_system_setting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:name="个人设置" />
+
+                    <com.marksixinfo.widgets.MineSystemView
+                        android:id="@+id/view_system_loing_out"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:line_view="false"
+                        app:name="退出登录" />
+
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+        </com.marksixinfo.widgets.MySmartRefreshLayout>
+
+    </com.marksixinfo.widgets.LoadingLayout>
+
+</FrameLayout>

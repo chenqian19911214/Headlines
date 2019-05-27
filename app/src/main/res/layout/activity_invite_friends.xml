@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title_white" />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_invite_friends_bg" />
+
+
+            <ImageView
+                android:id="@+id/iv_background_fix"
+                android:background="#ff602e"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_bottom_content1"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="95dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_my_invitation_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的邀请码：C9ESYRMA"
+                android:textColor="#fffee7cd"
+                android:textSize="15dp" />
+
+
+            <TextView
+                android:id="@+id/tv_copy_invitation_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11dp"
+                android:background="@drawable/icon_invite_friends_copy_bg"
+                android:gravity="center"
+                android:text="复制"
+                android:textColor="#fffee4c2"
+                android:textSize="13dp" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_immediately_invited"
+            android:layout_width="166dp"
+            android:layout_height="46dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/icon_invite_friends_button"
+            android:gravity="center"
+            android:text="立即邀请赚钱"
+            android:textColor="#ffc16300"
+            android:textSize="17dp" />
+
+
+    </FrameLayout>
+
+
+</LinearLayout>

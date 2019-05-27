@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_title" />
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:orientation="vertical">-->
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/elastic_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="选择帖子分类"
+                        android:textColor="#ff333333"
+                        android:textSize="17dp" />
+
+                    <TextView
+                        android:id="@+id/tv_classify"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:drawablePadding="10dp"
+                        android:drawableRight="@drawable/icon_right_grey"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="全部"
+                        android:textColor="#999"
+                        android:textSize="17dp" />
+
+
+                </RelativeLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#f4f5f7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_period_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:drawablePadding="6dp"
+                        android:drawableRight="@drawable/icon_pull_gray2"
+                        android:gravity="center"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:text=""
+                        android:textColor="#ff999999"
+                        android:textSize="15dp" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+
+                        <TextView
+                            android:id="@+id/tv_select_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/main_bg"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="15dp"
+                            android:text="点击添加标题(可选)"
+                            android:textColor="#999"
+                            android:textSize="17dp"
+                            android:visibility="visible" />
+
+
+                        <com.marksixinfo.widgets.CleanEditTextView
+                            android:id="@+id/edit_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:hint="标题40个字符以内"
+                            android:maxLength="40"
+                            android:maxLines="1"
+                            android:paddingLeft="15dp"
+                            android:paddingRight="15dp"
+                            android:singleLine="true"
+                            android:textColor="#333"
+                            android:textColorHint="#999"
+                            android:textSize="17dp"
+                            android:visibility="gone" />
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#f4f5f7" />
+
+                <!--<com.marksixinfo.widgets.CleanEditTextView-->
+                <!--android:id="@+id/cetv_title"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="66dp"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:background="@null"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:hint="请输入您的标题(非必填)"-->
+                <!--android:maxLines="1"-->
+                <!--android:singleLine="true"-->
+                <!--android:textColor="#333"-->
+                <!--android:textColorHint="#bcbcbc"-->
+                <!--android:textSize="17dp"-->
+                <!--android:textStyle="bold" />-->
+
+
+                <EditText
+                    android:id="@+id/edit_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@null"
+                    android:gravity="top"
+                    android:hint="来尽情发挥吧~"
+                    android:textColor="#333"
+                    android:textColorHint="#bcbcbc"
+                    android:textSize="17dp" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:overScrollMode="never" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <!--</LinearLayout>-->
+
+
+        <!--<FrameLayout-->
+        <!--android:id="@+id/fl_emotionview_main"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+        <!--<include-->
+        <!--android:id="@+id/include_emotion_view"-->
+        <!--layout="@layout/include_emotion_bar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#4c000000">
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

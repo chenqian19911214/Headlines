@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:descendantFocusability="beforeDescendants"
+        android:layerType="software">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <com.marksixinfo.widgets.LotteryPeriodRelativeLayout
+                    android:id="@+id/rl_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <com.github.mikephil.charting.charts.HorizontalBarChart
+                        android:id="@+id/chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/white" />
+
+                </com.marksixinfo.widgets.LotteryPeriodRelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
+
+                    <TextView
+                        android:id="@+id/tv_category_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:text=""
+                        android:textColor="#ff333333"
+                        android:textSize="17dp" />
+
+
+                <LinearLayout
+                    android:layout_width="101dp"
+                    android:layout_height="28dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/shape_lottery_chart_period"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+
+                        <com.marksixinfo.widgets.PeriodEditText
+                            android:id="@+id/edit_period"
+                            android:layout_width="61dp"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:gravity="center"
+                            android:hint="统计期数"
+                            android:imeOptions="actionGo"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:singleLine="true"
+                            android:text="100期"
+                            android:textColor="@color/grey_666"
+                            android:textColorHint="@color/grey_bcb"
+                            android:textSize="12dp" />
+
+                        <Button
+                            android:id="@+id/btn_commit"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/shape_lottery_chart_period_confirm"
+                            android:focusable="false"
+                            android:gravity="center"
+                            android:text="确定"
+                            android:textColor="#fff"
+                            android:textSize="13dp" />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_category_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#4c000000"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_release_popup"
+            android:orientation="vertical"
+            android:paddingBottom="15dp">
+
+            <com.marksixinfo.widgets.AutoFlowLayout
+                android:id="@+id/AutoFlowLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>

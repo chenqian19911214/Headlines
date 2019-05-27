@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="117dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:orientation="vertical"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="4dp"
+        app:cardMaxElevation="4dp">
+
+        <RelativeLayout
+            android:layout_width="94dp"
+            android:layout_height="94dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp">
+
+
+            <ImageView
+                android:id="@+id/iv_user_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_default_photo" />
+
+
+            <ImageView
+                android:id="@+id/iv_user_level"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginRight="6dp"
+                android:src="@drawable/icon_search_official" />
+
+            <ImageView
+                android:id="@+id/iv_more_user"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_search_more"
+                android:visibility="invisible" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tv_nike_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="26dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="aaa曾道人神算子..."
+            android:textColor="#ff333333"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/tv_user_domain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="www.batcccc.com"
+            android:textColor="#ff999999"
+            android:textSize="12sp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="15dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center_vertical"
+        android:visibility="gone" />
+
+</LinearLayout>

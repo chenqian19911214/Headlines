@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="1dp"
+    android:layout_marginRight="6dp"
+    android:orientation="horizontal">
+
+
+    <include
+        android:id="@+id/view_v1"
+        layout="@layout/item_lottery_head_current" />
+
+
+    <include
+        android:id="@+id/view_v2"
+        layout="@layout/item_lottery_head_current" />
+
+
+    <include
+        android:id="@+id/view_v3"
+        layout="@layout/item_lottery_head_current" />
+
+    <include
+        android:id="@+id/view_v4"
+        layout="@layout/item_lottery_head_current" />
+
+    <include
+        android:id="@+id/view_v5"
+        layout="@layout/item_lottery_head_current" />
+
+    <include
+        android:id="@+id/view_v6"
+        layout="@layout/item_lottery_head_current" />
+
+
+    <ImageView
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:padding="8dp"
+        android:layout_marginRight="-5dp"
+        android:src="@drawable/icon_lottery_jiahao" />
+
+    <include
+        android:id="@+id/view_v7"
+        layout="@layout/item_lottery_head_current" />
+
+
+</LinearLayout>

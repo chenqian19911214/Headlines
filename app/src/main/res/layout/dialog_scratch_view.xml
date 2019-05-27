@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:orientation="vertical">
+
+        <com.marksixinfo.widgets.CouponView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            android:padding="10dp"
+            app:cv_is_semicircle_bottom="true"
+            app:cv_is_semicircle_left="false"
+            app:cv_is_semicircle_right="false"
+            app:cv_is_semicircle_top="true"
+            app:cv_semicircle_color="#b2000000"
+            app:cv_semicircle_gap="4dp"
+            app:cv_semicircle_radius="4dp">
+
+
+            <LinearLayout
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:background="#FF5A5F">
+
+                    <TextView
+                        android:id="@+id/rl_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-14dp"
+                        android:gravity="center"
+                        android:text="33"
+                        android:textColor="#ffffffff"
+                        android:textSize="90dp" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:background="#fff">
+
+
+                    <TextView
+                        android:id="@+id/tv_sheng_xiao"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-5dp"
+                        android:gravity="center"
+                        android:text="aa"
+                        android:textColor="#666666"
+                        android:textSize="60dp" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+            <com.marksixinfo.widgets.ScratchView
+                android:id="@+id/ScratchView"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_gravity="center"
+                app:sv_maskBgReseId="@drawable/ic_scratch_mask" />
+
+
+        </com.marksixinfo.widgets.CouponView>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/icon_close_lottery" />
+
+</LinearLayout>

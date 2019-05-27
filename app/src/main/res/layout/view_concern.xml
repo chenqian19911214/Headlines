@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/tv_concern"
+        android:layout_width="54dp"
+        android:layout_height="26dp"
+        android:background="@drawable/shape_concern"
+        android:gravity="center"
+        android:text=""
+        android:textColor="#ffffffff"
+        android:textSize="14dp"
+        android:visibility="visible" />
+
+
+    <ProgressBar
+        android:id="@+id/pb_progress_bar"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_gravity="center"
+        android:indeterminateTint="#999999"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/pb_progress_bar_white"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_gravity="center"
+        android:indeterminateTint="#ffffff"
+        android:visibility="gone" />
+
+
+</FrameLayout>

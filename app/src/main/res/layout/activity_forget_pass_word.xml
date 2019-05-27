@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/layout_title_white" />
+
+    <com.marksixinfo.widgets.MySmartRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnablePureScrollMode="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                style="@style/line_vertical"
+                android:layout_height="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="17dp"
+                        android:text="手机号码"
+                        android:textColor="#ff333333"
+                        android:textSize="16dp" />
+
+
+                    <com.marksixinfo.widgets.CleanEditTextView
+                        android:id="@+id/edit_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:hint="请输入手机号码"
+                        android:inputType="number"
+                        android:maxLength="11"
+                        android:maxLines="1"
+                        android:paddingRight="20dp"
+                        android:singleLine="true"
+                        android:textColor="#333"
+                        android:textColorHint="#bcbcbc"
+                        android:textSize="16dp" />
+
+                </LinearLayout>
+
+                <View style="@style/line_vertical" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="33dp"
+                        android:text="验证码"
+                        android:textColor="#ff333333"
+                        android:textSize="16dp" />
+
+                    <com.marksixinfo.widgets.CleanEditTextView
+                        android:id="@+id/edit_auth_code"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:hint="请输入短信验证码"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:paddingRight="10dp"
+                        android:singleLine="true"
+                        android:textColor="#333"
+                        android:textColorHint="#bcbcbc"
+                        android:textSize="16dp" />
+
+
+                    <Button
+                        android:id="@+id/tv_send_auth_code"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/selector_register_auth_code"
+                        android:gravity="center"
+                        android:text="短信验证码"
+                        android:textSize="14dp" />
+
+
+                </LinearLayout>
+
+
+                <View style="@style/line_vertical" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="33dp"
+                        android:text="新密码"
+                        android:textColor="#ff333333"
+                        android:textSize="16dp" />
+
+
+                    <com.marksixinfo.widgets.CleanEditTextView
+                        android:id="@+id/edit_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:hint="请输入新密码"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:paddingRight="20dp"
+                        android:singleLine="true"
+                        android:textColor="#333"
+                        android:textColorHint="#bcbcbc"
+                        android:textSize="16dp" />
+
+                </LinearLayout>
+
+
+                <View style="@style/line_vertical" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="17dp"
+                        android:text="确认密码"
+                        android:textColor="#ff333333"
+                        android:textSize="16dp" />
+
+
+                    <com.marksixinfo.widgets.CleanEditTextView
+                        android:id="@+id/edit_affirm_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:hint="请再次输入密码"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:paddingRight="20dp"
+                        android:singleLine="true"
+                        android:textColor="#333"
+                        android:textColorHint="#bcbcbc"
+                        android:textSize="16dp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/tv_affirm"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/shape_login_input2"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="#fff"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+    </com.marksixinfo.widgets.MySmartRefreshLayout>
+
+</LinearLayout>

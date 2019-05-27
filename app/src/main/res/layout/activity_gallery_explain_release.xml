@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_title" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.marksixinfo.widgets.CleanEditTextView
+            android:id="@+id/cetv_editTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@null"
+            android:imeOptions="actionSearch"
+            android:maxLines="1"
+            android:layout_marginVertical="15dp"
+            android:singleLine="true"
+            android:hint="@string/no_input_time"
+            android:textColor="#333"
+            android:textColorHint="#BCBCBC"
+            android:textSize="17sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F4F5F7"/>
+
+
+        <EditText
+            android:id="@+id/cetv_editTextView_comment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="15dp"
+            android:background="@null"
+            android:imeOptions="actionSearch"
+            android:layout_marginVertical="20dp"
+            android:gravity="top"
+            android:textColor="#333"
+            android:hint="请输入图解内容~"
+            android:textColorHint="#BCBCBC"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+</LinearLayout>

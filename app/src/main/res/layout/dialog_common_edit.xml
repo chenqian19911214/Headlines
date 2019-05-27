@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp">
+
+
+    <TextView
+        android:id="@+id/ok"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/edit"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="@android:color/white" />
+
+
+    <EditText
+        android:id="@id/edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/ok"
+        android:layout_toStartOf="@+id/ok"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:inputType="text"
+        android:minHeight="30dp"
+        android:textColor="#333333"
+        android:textSize="15dp" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="3dp"
+        android:layout_alignLeft="@id/edit"
+        android:layout_alignRight="@id/edit"
+        android:layout_below="@id/edit"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginRight="-5dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/shape_main_color_line" />
+
+</RelativeLayout>

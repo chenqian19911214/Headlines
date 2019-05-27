@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/main_bg"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ecedf1" />
+
+        <LinearLayout
+            android:id="@+id/ll_keyboard_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/iv_keyboard"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="15dp"
+                android:clickable="true"
+                android:padding="11dp"
+                android:src="@drawable/icon_keyboard" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+
+            <ImageView
+                android:id="@+id/iv_topic"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginRight="18dp"
+                android:clickable="true"
+                android:padding="11dp"
+                android:src="@drawable/icon_topic" />
+
+            <ImageView
+                android:id="@+id/iv_picture"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginRight="18dp"
+                android:clickable="true"
+                android:padding="11dp"
+                android:src="@drawable/icon_picture" />
+
+            <ImageView
+                android:id="@+id/iv_face"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginRight="12dp"
+                android:clickable="true"
+                android:padding="11dp"
+                android:src="@drawable/icon_face" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ecedf1" />
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/ll_face_container"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/white"-->
+        <!--android:orientation="vertical"-->
+        <!--android:visibility="gone">-->
+
+        <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="center">-->
+
+        <!--<androidx.viewpager.widget.ViewPager-->
+        <!--android:id="@+id/viewPager"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_gravity="center" />-->
+        <!--</RelativeLayout>-->
+
+        <!--<com.marksixinfo.widgets.easyemoji.CircleIndicator-->
+        <!--android:id="@+id/circleIndicator"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="42dp"-->
+        <!--android:gravity="center" />-->
+
+
+        <!--&lt;!&ndash;<net.lucode.hackware.magicindicator.MagicIndicator&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/magic_indicator"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="42dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_centerHorizontal="true"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_gravity="center_horizontal" />&ndash;&gt;-->
+
+
+        <!--</LinearLayout>-->
+    </LinearLayout>
+
+</LinearLayout>

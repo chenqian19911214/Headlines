@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="275dp"
+    android:layout_height="444dp"
+    android:background="@drawable/updata_dolg_beijing">
+
+    <LinearLayout
+        android:id="@+id/button_layout_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_ok"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/shape_update_bg_ok_dialog"
+            android:gravity="center"
+            android:text="立即更新"
+            android:textColor="@color/white"
+            android:layout_marginLeft="38dp"
+            android:layout_marginRight="38dp"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="38dp"
+            android:layout_marginRight="38dp"
+            android:gravity="center"
+            android:text="以后再说"
+            android:textColor="#999999"
+            android:textSize="12sp" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_version_name"
+        android:layout_width="60dp"
+        android:layout_height="22dp"
+        android:background="@drawable/shape_update_bg_ok_dialog"
+        android:gravity="center"
+        android:text="0.01"
+        android:layout_marginTop="127dp"
+        android:textColor="@color/white"
+        android:layout_marginLeft="71dp"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/text_tile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="232dp"
+        android:textColor="#333333"
+        android:layout_marginLeft="30dp"
+        android:textSize="14sp"
+        android:text="更新内容："/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/text_tile"
+        android:scrollbars="none"
+        android:layout_above="@+id/button_layout_id">
+        <TextView
+            android:id="@+id/update_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:lineSpacingExtra="4.5dp"
+            android:textColor="#333333"
+            android:text="1:修复重大bug\n2:可以添加邮箱"/>
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/layout_title" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+
+        <com.marksixinfo.widgets.LoadingLayout
+            android:id="@+id/loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.marksixinfo.widgets.MySmartRefreshLayout
+                android:id="@+id/refreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ListView
+                    android:id="@+id/list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@null"
+                    android:listSelector="@android:color/transparent"
+                    android:scrollbars="none"
+                    android:visibility="invisible" />
+
+
+            </com.marksixinfo.widgets.MySmartRefreshLayout>
+        </com.marksixinfo.widgets.LoadingLayout>
+
+    </FrameLayout>
+
+
+    <View style="@style/line_vertical" />
+
+    <LinearLayout
+        android:id="@+id/ll_bottom_content"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="#fff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/rl_write_comment"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="18dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_comment_edit">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:drawableLeft="@drawable/icon_write_comment"
+                android:drawablePadding="6dp"
+                android:gravity="center_vertical"
+                android:text="写评论..."
+                android:textColor="#ff333333"
+                android:textSize="15dp" />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="16dp">
+
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon_comment" />
+
+
+            <TextView
+                android:id="@+id/tv_past_message_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/shape_red_point"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingBottom="1dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:paddingTop="1dp"
+                android:text=""
+                android:textColor="#fff"
+                android:textSize="10dp"
+                android:visibility="invisible"
+                tools:visibility="visible" />
+
+
+        </RelativeLayout>
+
+
+        <!--<ImageView-->
+        <!--android:id="@+id/iv_collect"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_marginLeft="22dp"-->
+        <!--android:padding="10dp"-->
+        <!--android:src="@drawable/collect_uncheck" />-->
+
+
+        <com.marksixinfo.widgets.sparkbutton.SparkButton
+            android:id="@+id/iv_collect"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="22dp"
+            app:sparkbutton_activeImage="@drawable/collect_checked"
+            app:sparkbutton_animationSpeed=".85"
+            app:sparkbutton_iconSize="20dp"
+            app:sparkbutton_inActiveImage="@drawable/collect_uncheck" />
+
+
+        <com.marksixinfo.widgets.sparkbutton.SparkButton
+            android:id="@+id/iv_praise"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            app:sparkbutton_activeImage="@drawable/praise_checked"
+            app:sparkbutton_animationSpeed=".85"
+            app:sparkbutton_iconSize="20dp"
+            app:sparkbutton_inActiveImage="@drawable/praise_uncheck" />
+
+
+        <!--<ImageView-->
+        <!--android:id="@+id/iv_praise"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_marginBottom="15dp"-->
+        <!--android:layout_marginLeft="22dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:padding="10dp"-->
+        <!--android:src="@drawable/praise_uncheck" />-->
+
+
+    </LinearLayout>
+</LinearLayout>

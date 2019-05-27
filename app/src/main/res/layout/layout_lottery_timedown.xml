@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/timedown_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="00"
+        android:textColor="#CD5E37"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/hour_flag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text=":"
+        android:textColor="#CD5E37"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/timedown_min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="00"
+        android:textColor="#CD5E37"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/minute_flag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text=":"
+        android:textColor="#CD5E37"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/timedown_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="00"
+        android:textColor="#CD5E37"
+        android:textSize="25sp" />
+</LinearLayout>

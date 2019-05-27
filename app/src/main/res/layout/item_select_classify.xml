@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="50.5dp"
+    android:background="#fff"
+    android:orientation="vertical">
+
+
+    <com.marksixinfo.widgets.SwipeMenuLayout
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:ios="true"
+        app:leftSwipe="true"
+        app:swipeEnable="true">
+
+
+        <LinearLayout
+            android:id="@+id/ll_add_classify"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp">
+
+
+            <!--<ImageView-->
+            <!--android:visibility="gone"-->
+            <!--android:id="@+id/iv_delete_order"-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:padding="10dp"-->
+            <!--android:src="@drawable/icon_select_classify_delete" />-->
+
+
+            <TextView
+                android:id="@+id/tv_classify"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="#ff333333"
+                android:textSize="17dp" />
+
+
+            <ImageView
+                android:id="@+id/iv_change_order"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="5dp"
+                android:padding="10dp"
+                android:src="@drawable/icon_change_order" />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_update_name"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="#F68500"
+            android:gravity="center"
+            android:text="修改"
+            android:textColor="#fff"
+            android:textSize="17dp" />
+
+
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="#F13838"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="#fff"
+            android:textSize="17dp" />
+
+
+    </com.marksixinfo.widgets.SwipeMenuLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#f4f5f7" />
+
+</LinearLayout>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <declare-styleable name="SwipeMenuLayout">
+        <attr name="swipeEnable" format="boolean" />
+        <attr name="ios" format="boolean" />
+        <attr name="leftSwipe" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SwipeBackLayout1">
+        <attr name="edge_size" format="dimension" />
+        <attr name="edge_flag">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+            <enum name="bottom" value="2" />
+            <enum name="all" value="3" />
+        </attr>
+        <attr name="shadow_left" format="reference" />
+        <attr name="shadow_right" format="reference" />
+        <attr name="shadow_bottom" format="reference" />
+    </declare-styleable>
+
+    <attr name="SwipeBackLayoutStyle" format="reference" />
+    <declare-styleable name="CircleIndicator">
+        <attr name="ci_width" format="dimension" />
+        <attr name="ci_height" format="dimension" />
+        <attr name="ci_margin" format="dimension" />
+        <attr name="ci_animator" format="reference" />
+        <attr name="ci_animator_reverse" format="reference" />
+        <attr name="ci_drawable" format="reference" />
+        <attr name="ci_drawable_unselected" format="reference" />
+
+        <attr name="ci_orientation" format="enum">
+            <!-- Defines an horizontal widget. -->
+            <enum name="horizontal" value="0" />
+            <!-- Defines a vertical widget. -->
+            <enum name="vertical" value="1" />
+        </attr>
+
+        <attr name="ci_gravity">
+            <!-- Push object to the top of its container, not changing its size. -->
+            <flag name="top" value="0x30" />
+            <!-- Push object to the bottom of its container, not changing its size. -->
+            <flag name="bottom" value="0x50" />
+            <!-- Push object to the left of its container, not changing its size. -->
+            <flag name="left" value="0x03" />
+            <!-- Push object to the right of its container, not changing its size. -->
+            <flag name="right" value="0x05" />
+            <!-- Place object in the vertical center of its container, not changing its size. -->
+            <flag name="center_vertical" value="0x10" />
+            <!-- Grow the vertical size of the object if needed so it completely fills its container. -->
+            <flag name="fill_vertical" value="0x70" />
+            <!-- Place object in the horizontal center of its container, not changing its size. -->
+            <flag name="center_horizontal" value="0x01" />
+            <!-- Grow the horizontal size of the object if needed so it completely fills its container. -->
+            <flag name="fill_horizontal" value="0x07" />
+            <!-- Place the object in the center of its container in both the vertical and horizontal axis, not changing its size. -->
+            <flag name="center" value="0x11" />
+            <!-- Grow the horizontal and vertical size of the object if needed so it completely fills its container. -->
+            <flag name="fill" value="0x77" />
+            <!-- Additional option that can be set to have the top and/or bottom edges of
+            the child clipped to its container's bounds.
+            The clip will be based on the vertical gravity: a top gravity will clip the bottom
+            edge, a bottom gravity will clip the top edge, and neither will clip both edges. -->
+            <flag name="clip_vertical" value="0x80" />
+            <!-- Additional option that can be set to have the left and/or right edges of
+            the child clipped to its container's bounds.
+            The clip will be based on the horizontal gravity: a left gravity will clip the right
+            edge, a right gravity will clip the left edge, and neither will clip both edges. -->
+            <flag name="clip_horizontal" value="0x08" />
+            <!-- Push object to the beginning of its container, not changing its size. -->
+            <flag name="start" value="0x00800003" />
+            <!-- Push object to the end of its container, not changing its size. -->
+            <flag name="end" value="0x00800005" />
+        </attr>
+
+    </declare-styleable>
+
+
+    <declare-styleable name="HeaderViewPager">
+        <attr name="hvp_topOffset" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="NineGridImageView">
+        <attr name="singleImgSize" format="dimension" />
+        <attr name="imgGap" format="dimension" />
+        <attr name="isRounded" format="boolean" />
+        <attr name="maxSize" format="integer" />
+        <attr name="showStyle" format="enum">
+            <enum name="grid" value="0" />
+            <enum name="fill" value="1" />
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="MineSystemView">
+        <attr name="name" format="string" />
+        <attr name="line_view" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SettingItemView">
+        <attr name="setting_name" format="string" />
+        <attr name="setting_arrow" format="boolean" />
+        <attr name="setting_color" format="color|reference" />
+        <attr name="setting_line_view" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="sparkbutton">
+        <attr name="sparkbutton_iconSize" format="dimension|reference" />
+        <attr name="sparkbutton_activeImage" format="reference" />
+        <attr name="sparkbutton_inActiveImage" format="reference" />
+        <attr name="sparkbutton_primaryColor" format="reference" />
+        <attr name="sparkbutton_secondaryColor" format="reference" />
+        <attr name="sparkbutton_pressOnTouch" format="boolean" />
+        <attr name="sparkbutton_animationSpeed" format="float" />
+        <attr name="sparkbutton_activeImageTint" format="reference" />
+        <attr name="sparkbutton_inActiveImageTint" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SwipeBackLayout">
+        <attr name="swipeBackFactor" format="float"></attr>
+        <attr name="maskAlpha" format="integer"></attr>
+        <attr name="isSwipeFromEdge" format="boolean"></attr>
+        <attr name="directionMode">
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+            <enum name="top" value="4" />
+            <enum name="bottom" value="8" />
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="SwitchButton" tools:ignore="ResourceName">
+        <attr name="kswThumbDrawable" format="reference" />
+        <attr name="kswThumbColor" format="color|reference" />
+        <attr name="kswThumbMargin" format="dimension|reference" />
+        <attr name="kswThumbMarginTop" format="dimension|reference" />
+        <attr name="kswThumbMarginBottom" format="dimension|reference" />
+        <attr name="kswThumbMarginLeft" format="dimension|reference" />
+        <attr name="kswThumbMarginRight" format="dimension|reference" />
+        <attr name="kswThumbWidth" format="dimension|reference" />
+        <attr name="kswThumbHeight" format="dimension|reference" />
+        <attr name="kswThumbRadius" format="dimension|reference" />
+        <attr name="kswBackRadius" format="dimension|reference" />
+        <attr name="kswBackDrawable" format="reference" />
+        <attr name="kswBackColor" format="color|reference" />
+        <attr name="kswFadeBack" format="boolean" />
+        <attr name="kswThumbRangeRatio" format="float" />
+        <attr name="kswAnimationDuration" format="integer" />
+        <attr name="kswTintColor" format="color|reference" />
+        <attr name="kswTextOn" format="string" />
+        <attr name="kswTextOff" format="string" />
+        <attr name="kswTextThumbInset" format="dimension" />
+        <attr name="kswTextExtra" format="dimension" />
+        <attr name="kswTextAdjust" format="dimension" />
+    </declare-styleable>
+
+
+    <!-- 刮奖控件-->
+    <declare-styleable name="ScratchView">
+        <!--蒙层的颜色-->
+        <attr name="sv_maskColor" format="color|reference" />
+        <!--水印图片值-->
+        <attr name="sv_watermark" format="reference" />
+        <!--擦除尺寸大小-->
+        <attr name="sv_eraseSize" format="float" />
+        <!--最大擦除比例-->
+        <attr name="sv_maxPercent" format="integer" />
+        <attr name="sv_maskBgReseId" format="reference" />
+    </declare-styleable>
+
+    <!--锯齿效果-->
+    <declare-styleable name="CouponView">
+        <attr name="cv_semicircle_gap" format="dimension|reference"/>
+        <attr name="cv_semicircle_radius" format="dimension|reference"/>
+        <attr name="cv_semicircle_color" format="color|reference"/>
+        <attr name="cv_dash_line_length" format="dimension|reference"/>
+        <attr name="cv_dash_line_gap" format="dimension|reference"/>
+        <attr name="cv_dash_line_height" format="dimension|reference"/>
+        <attr name="cv_dash_line_color" format="color|reference"/>
+        <attr name="cv_is_semicircle_top" format="boolean|reference"/>
+        <attr name="cv_is_semicircle_bottom" format="boolean|reference"/>
+        <attr name="cv_is_semicircle_left" format="boolean|reference"/>
+        <attr name="cv_is_semicircle_right" format="boolean|reference"/>
+        <attr name="cv_is_dash_line_top" format="boolean|reference"/>
+        <attr name="cv_is_dash_line_bottom" format="boolean|reference"/>
+        <attr name="cv_is_dash_line_left" format="boolean|reference"/>
+        <attr name="cv_is_dash_line_right" format="boolean|reference"/>
+        <attr name="cv_dash_line_margin_top" format="dimension|reference"/>
+        <attr name="cv_dash_line_margin_bottom" format="dimension|reference"/>
+        <attr name="cv_dash_line_margin_left" format="dimension|reference"/>
+        <attr name="cv_dash_line_margin_right" format="dimension|reference"/>
+    </declare-styleable>
+
+</resources>

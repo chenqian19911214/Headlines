@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="131dp"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+
+            <com.marksixinfo.widgets.ScaleImageView
+                android:id="@+id/iv_image"
+                android:layout_width="72dp"
+                android:layout_height="100dp"
+                android:scaleType="center" />
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="-2dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp" />
+
+
+                <TextView
+                    android:id="@+id/tv_update_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:drawableLeft="@drawable/icon_search_gallery_allow"
+                    android:drawablePadding="5dp"
+                    android:textColor="#ff999999"
+                    android:textSize="12dp" />
+
+
+                <com.marksixinfo.widgets.AutoFlowLayout
+                    android:id="@+id/group_flow_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-5dp" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            style="@style/line_vertical"
+            android:layout_marginRight="15dp" />
+
+    </LinearLayout>
+</LinearLayout>

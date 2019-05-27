@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
+    <com.marksixinfo.widgets.LoadingLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.marksixinfo.widgets.MySmartRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never" />
+        </com.marksixinfo.widgets.MySmartRefreshLayout>
+    </com.marksixinfo.widgets.LoadingLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_delete_content"
+        android:layout_width="match_parent"
+        android:layout_height="50.5dp"
+        android:layout_gravity="bottom"
+        android:background="#fff"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+
+        <View
+            style="@style/line_vertical"
+            android:background="#e5e5e5" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_delete_all"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="一键清空"
+                android:textColor="#ff333333"
+                android:textSize="16dp" />
+
+
+            <View
+                style="@style/line_horizontal"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="#e5e5e5" />
+
+            <TextView
+                android:id="@+id/tv_delete_select"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="删除"
+                android:textColor="#ff999999"
+                android:textSize="16dp" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/layout_title" />
+
+    <LinearLayout
+        android:id="@+id/ll_add_classify"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <com.marksixinfo.widgets.CleanEditTextView
+            android:id="@+id/ed_add_classify"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入分类名称(10字以内)"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="#333"
+            android:textColorHint="#999"
+            android:textSize="17dp" />
+
+
+        <TextView
+            android:id="@+id/tv_save_classify"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:background="#ddd"
+            android:gravity="center"
+            android:text="保存"
+            android:textColor="#ffffffff"
+            android:textSize="17dp" />
+
+
+    </LinearLayout>
+
+    <com.marksixinfo.widgets.LoadingLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:overScrollMode="never" />
+
+    </com.marksixinfo.widgets.LoadingLayout>
+
+</LinearLayout>

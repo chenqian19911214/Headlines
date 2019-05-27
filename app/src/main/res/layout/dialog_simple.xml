@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_share_dialog_bg"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp"
+            android:minHeight="51dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="31dp"
+            android:paddingRight="31dp"
+            android:paddingTop="15dp"
+            android:text=""
+            android:textColor="#333"
+            android:textSize="20dp" />
+
+
+        <View style="@style/line_vertical" />
+
+
+        <TextView
+            android:id="@+id/tv_two"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#333"
+            android:textSize="20dp" />
+
+
+        <!--<View style="@style/line_vertical" />-->
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_share_dialog_bg">
+
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="#333"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="toast_common_system_net_error">网络异常，请检查网络</string>
+
+</resources>
