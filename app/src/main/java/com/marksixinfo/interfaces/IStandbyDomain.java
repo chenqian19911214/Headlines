@@ -7,7 +7,7 @@ package com.marksixinfo.interfaces;
  * @Date: 2019/5/25 0025 19:24
  * @Description:
  */
-public interface IStandbyRemark {
+public interface IStandbyDomain {
 
 
     /**
@@ -15,7 +15,7 @@ public interface IStandbyRemark {
      *
      * @param id
      */
-    void delRemark(String id);
+    void delDomain(String id);
 
     /**
      * 侧滑

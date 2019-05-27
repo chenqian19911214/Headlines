@@ -30,15 +30,6 @@ public class MineConcernData {
     private String Uid;
     private int look_status;  // 是否关注，0:未关注;1:已关注 2:自己
     private String Remark;
-    private boolean hasViewLine;
-
-    public boolean isHasViewLine() {
-        return hasViewLine;
-    }
-
-    public void setHasViewLine(boolean hasViewLine) {
-        this.hasViewLine = hasViewLine;
-    }
 
     public int getLook_status() {
         return look_status;

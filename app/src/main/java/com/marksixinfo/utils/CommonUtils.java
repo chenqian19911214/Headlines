@@ -972,7 +972,7 @@ public class CommonUtils {
     public static boolean isContainsHttp(String s) {
         if (CommonUtils.StringNotNull(s)) {
             String ss = s.toLowerCase();
-            if (ss.contains("http") || ss.contains("https")) {
+            if (ss.startsWith("http") || ss.startsWith("https")) {
                 return true;
             }
         }
@@ -1280,6 +1280,23 @@ public class CommonUtils {
         for (MineConcernData bean : list) {
             if (bean != null) {
                 if (CommonUtils.StringNotNull(user_id) && user_id.equals(bean.getMember_Id())) {
+                    bean.setLook_status(data.getLook_status());
+                }
+            }
+        }
+    }
+
+    /**
+     * 搜索用户关注变更
+     *
+     * @param data
+     * @param list
+     */
+    public static void searchConcernDataChange(MainHomeData data, List<MineConcernData> list) {
+        String user_id = data.getUser_Id();
+        for (MineConcernData bean : list) {
+            if (bean != null) {
+                if (CommonUtils.StringNotNull(user_id) && user_id.equals(bean.getId())) {
                     bean.setLook_status(data.getLook_status());
                 }
             }

@@ -340,11 +340,11 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
             LotteryRealTimeData data = event.getMessage();
             if (data != null) {
                 String period = data.getPeriod();
+                int isOpen = data.getIsOpen();
                 tvPeriodNumberName.setText(CommonUtils.StringNotNull(period) ? "第" + period + "期" : "");
                 List<String> lottery = data.getLottery();
                 setIvLotteryIng(lottery);
-                SPUtil.setStringValue(getContext(), SPUtil.LOTTERY_CURRENT, lottery != null && lottery.size()
-                        > 0 && lottery.size() < 7 ? JSONUtils.toJson(event) : "");
+                SPUtil.setStringValue(getContext(), SPUtil.LOTTERY_CURRENT, isOpen == 2 ? JSONUtils.toJson(event) : "");
             } else {
                 SPUtil.setStringValue(getContext(), SPUtil.LOTTERY_CURRENT, "");
             }

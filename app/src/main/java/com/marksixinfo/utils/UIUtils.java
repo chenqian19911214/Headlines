@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -25,6 +26,7 @@ import com.marksixinfo.bean.ClientInfo;
 import com.marksixinfo.constants.NumberConstants;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
 
 
 public class UIUtils {
@@ -272,12 +274,12 @@ public class UIUtils {
      * @return
      */
     public static int getScreenWidth(Context context) {
-        if (context!=null) {
+        if (context != null) {
             WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
             DisplayMetrics outMetrics = new DisplayMetrics();
             wm.getDefaultDisplay().getMetrics(outMetrics);
             return outMetrics.widthPixels;
-        }else
+        } else
             return 0;
 
     }
@@ -466,4 +468,26 @@ public class UIUtils {
         return context.getResources().getDimensionPixelSize(resourceId);
     }
 
+
+    /**
+     * context 获取Activity
+     *
+     * @param context
+     * @return
+     */
+    @Nullable
+    public static Activity findActivity(Context context) {
+        if (context == null) {
+            return null;
+        }
+        if (context instanceof Activity) {
+            return (Activity) context;
+        }
+        if (context instanceof ContextWrapper) {
+            ContextWrapper wrapper = (ContextWrapper) context;
+            return findActivity(wrapper.getBaseContext());
+        } else {
+            return null;
+        }
+    }
 }

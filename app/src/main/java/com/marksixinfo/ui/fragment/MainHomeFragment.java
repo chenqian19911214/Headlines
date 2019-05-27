@@ -96,6 +96,8 @@ public class MainHomeFragment extends PageBaseFragment {
      * 签到弹框
      */
     private void startSignIn() {
+        SPUtil.setTaskSignInTime(getContext(),
+                new TaskSignInData(System.currentTimeMillis(), SPUtil.getUserId(getContext())));//储存签到请求时间
         new HeadlineImpl(new MarkSixNetCallBack<List<TaskCenterData.CheckinBean>>(this, TaskCenterData.CheckinBean.class) {
             @Override
             public void onSuccess(List<TaskCenterData.CheckinBean> response, int id) {
@@ -106,8 +108,6 @@ public class MainHomeFragment extends PageBaseFragment {
                         showSignInSuccess();
                     }
                 }
-                SPUtil.setTaskSignInTime(getContext(),
-                        new TaskSignInData(System.currentTimeMillis(), SPUtil.getUserId(getContext())));//储存签到弹框时间
             }
         }.setNeedDialog(false).setNeedToast(false)).signInHistory();
 

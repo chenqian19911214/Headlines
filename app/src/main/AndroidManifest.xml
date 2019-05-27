@@ -664,15 +664,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.StandbyRemarkActivity"
-            android:label="备用域名编辑">
+            android:name=".ui.activity.StandbyDomainActivity"
+            android:label="备用域名编辑"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data
-                    android:host="@string/StandbyRemarkActivity"
+                    android:host="@string/StandbyDomainActivity"
                     android:scheme="@string/scheme" />
             </intent-filter>
         </activity>

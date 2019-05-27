@@ -137,6 +137,24 @@ public class MainActivity extends MarkSixActivity {
 
         initMagicIndicator();
 
+        setMessage();
+
+//        tezt();
+    }
+
+    private void tezt() {
+        mViewPager.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (indes >= lsits.size()) {
+                    indes = 0;
+                }
+                String s = lsits.get(indes);
+                onMessage(s);
+                indes++;
+                tezt();
+            }
+        }, 7000);
     }
 
     /**
@@ -203,50 +221,6 @@ public class MainActivity extends MarkSixActivity {
         }
     }
 
-//    private SocketListener socketListener = new SimpleListener() {
-//        @Override
-//        public void onConnected() {
-//            LogUtils.d("onConnected");
-//        }
-//
-//        @Override
-//        public void onConnectFailed(Throwable e) {
-//            if (e != null) {
-//                LogUtils.d("onConnectFailed:" + e.toString());
-//            } else {
-//                LogUtils.d("onConnectFailed:null");
-//            }
-//        }
-//
-//        @Override
-//        public void onDisconnect() {
-//            LogUtils.d("onDisconnect");
-//        }
-//
-//        @Override
-//        public void onSendDataError(ErrorResponse errorResponse) {
-//            errorResponse.release();
-//            LogUtils.d("onSendDataError:" + errorResponse.toString());
-//        }
-//
-//        @Override
-//        public <T> void onMessage(String message, T data) {
-//            MainActivity.this.onMessage(message);
-//            LogUtils.d("onMessage(String, T):" + message);
-////            toast("MainActivity推送信息:" + message);
-//        }
-//
-//        @Override
-//        public void onPing(Framedata framedata) {
-//            //to override
-//        }
-//
-//        @Override
-//        public void onPong(Framedata framedata) {
-//            //to override
-//        }
-//    };
-
     @Override
     public void onMessage(String message) {
         LotteryRealTimeData data = CommonUtils.getRealTimeDataByMessage(message);
@@ -254,10 +228,35 @@ public class MainActivity extends MarkSixActivity {
             int isOpen = data.getIsOpen();//0,晚上9点20 后台开始重置  1,准备开奖,弹框提醒  2,开球中   3,开奖结束
             if (isOpen == 1) {
                 setRemindDialog();
-            } else {
-                EventBusUtil.post(new LotteryRealTimeEvent(isOpen, data));
             }
+            EventBusUtil.post(new LotteryRealTimeEvent(isOpen, data));
         }
+    }
+
+    List<String> lsits = new ArrayList<>();
+    int indes = 0;
+
+    private void setMessage() {
+        String s0 = "{\"period\":\"2019058\",\"open\":0,\"lottery\":[\"16\",\"\",\"\",\"\",\"\",\"\",\"\"]}";
+        String s1 = "{\"period\":\"2019058\",\"open\":1,\"lottery\":[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]}";
+        String s2 = "{\"period\":\"2019058\",\"open\":2,\"lottery\":[\"16\",\"\",\"\",\"\",\"\",\"\",\"\"]}";
+        String s3 = "{\"period\":\"2019058\",\"open\":2,\"lottery\":[\"16\",\"12\",\"\",\"\",\"\",\"\",\"\"]}";
+        String s4 = "{\"period\":\"2019058\",\"open\":2,\"lottery\":[\"16\",\"12\",\"35\",\"\",\"\",\"\",\"\"]}";
+        String s5 = "{\"period\":\"2019058\",\"open\":2,\"lottery\":[\"16\",\"12\",\"35\",\"09\",\"\",\"\",\"\"]}";
+        String s6 = "{\"period\":\"2019058\",\"open\":2,\"lottery\":[\"16\",\"12\",\"35\",\"09\",\"23\",\"\",\"\"]}";
+        String s7 = "{\"period\":\"2019058\",\"open\":2,\"lottery\":[\"16\",\"12\",\"35\",\"09\",\"23\",\"44\",\"\"]}";
+        String s8 = "{\"period\":\"2019058\",\"open\":3,\"lottery\":[\"16\",\"12\",\"35\",\"09\",\"23\",\"44\",\"02\"]}";
+
+        lsits.add(s0);
+        lsits.add(s1);
+        lsits.add(s2);
+        lsits.add(s3);
+        lsits.add(s4);
+        lsits.add(s5);
+        lsits.add(s6);
+        lsits.add(s7);
+        lsits.add(s8);
+
     }
 
     /**

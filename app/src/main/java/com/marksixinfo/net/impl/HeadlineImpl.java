@@ -236,12 +236,24 @@ public class HeadlineImpl extends NetManagerBase implements HeadlineApi {
         try {
             String encode = URLEncoder.encode(keyword, "utf-8");
             BaseNetUtil.putStringParams(params, KEYWORD, encode);
-            BaseNetUtil.get(SEARCH_RESULT, params, callBack);
+            BaseNetUtil.get(GET_SEARCH_USER_RESULT, params, callBack);
+//            BaseNetUtil.get(SEARCH_RESULT, params, callBack);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
 
+
+    /**
+     * 功能描述: 搜索获取期数
+     *
+     * @auther: Administrator
+     * @date: 2019/3/22 0022 13:10
+     */
+    @Override
+    public void getSearchPeriod() {
+        BaseNetUtil.get(GET_SEARCH_PERIOD, null, callBack);
+    }
 
     /**
      * 功能描述: 回帖 - 回复帖子

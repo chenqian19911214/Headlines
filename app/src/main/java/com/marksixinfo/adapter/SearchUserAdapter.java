@@ -34,8 +34,11 @@ public class SearchUserAdapter extends SimpleAdapter3<MineConcernData> {
         if (item != null) {
             //头像
             holder.setCircleImageView(R.id.iv_user_photo, item.getFace());
-            //最后一个
-            boolean isLast = position >= NumberConstants.SEARCH_USER_COUNT;
+            //超6条,最后一个
+            boolean isLast = position >= NumberConstants.SEARCH_USER_COUNT - 1;
+
+            holder.setVisible(R.id.view_line_start, position==0);
+            holder.setVisible(R.id.view_line_end, position >= mData.size() - 1);
 
             if (isLast) {
                 //昵称
@@ -44,7 +47,6 @@ public class SearchUserAdapter extends SimpleAdapter3<MineConcernData> {
                 holder.setText(R.id.tv_user_domain, "");
                 holder.setVisible(R.id.iv_user_level, false);
                 holder.setVisible(R.id.iv_more_user, true);
-                holder.setVisible(R.id.view_line, true);
             } else {
                 String nickname = item.getNickname();
                 int level = item.getLevel();
@@ -57,7 +59,6 @@ public class SearchUserAdapter extends SimpleAdapter3<MineConcernData> {
                 CommonUtils.setSearchUserLevel(holder.getView(R.id.iv_user_level), level);
 
                 holder.setVisible(R.id.iv_more_user, false);
-                holder.setVisible(R.id.view_line, false);
             }
             holder.getConvertView().setOnClickListener(new View.OnClickListener() {
                 @Override

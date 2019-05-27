@@ -62,11 +62,11 @@ public class StartActivity extends ActivityBase {
 //        }, NumberConstants.START_TIME);
 
 //        initInfo();
+        CommonUtils.setCurrentLottery(getApplicationContext(), "");
 
-
-        CommonUtils.setCurrentLottery(getApplicationContext(),
+//        CommonUtils.setCurrentLottery(getApplicationContext(),
 //                "{\"period\":\"2019057\",\"open\":1,\"lottery\":[\"43\",\"13\",\"11\",\"17\",\"33\",\"14\",\"27\"]}");
-                "{\"period\":\"2019058\",\"open\":1,\"lottery\":[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]}");
+//                "{\"period\":\"2019058\",\"open\":2,\"lottery\":[\"16\",\"\",\"\",\"\",\"\",\"\",\"\"]}");
     }
 
     /**
@@ -147,17 +147,6 @@ public class StartActivity extends ActivityBase {
         public <T> void onMessage(String message, T d) {
 //            StartActivity.this.onMessage(message);
             LogUtils.d("onMessage(String, T):" + message);
-//            ToastShow.toastShow(getApplicationContext(), "推送信息:" + message);
-//            LotteryRealTimeData data = CommonUtils.getRealTimeDataByMessage(message);
-//            if (data != null) {
-//                List<String> lottery = data.getLottery();
-//                if (lottery != null && lottery.size() < 7) {
-//                    LotteryRealTimeEvent event = new LotteryRealTimeEvent(2, data);
-//                    SPUtil.setStringValue(getApplicationContext(), SPUtil.LOTTERY_CURRENT, JSONUtils.toJson(event));
-//                    return;
-//                }
-//            }
-//            SPUtil.setStringValue(getApplicationContext(), SPUtil.LOTTERY_CURRENT, "");
             CommonUtils.setCurrentLottery(getApplicationContext(), message);
         }
     };

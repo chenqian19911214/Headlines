@@ -17,6 +17,7 @@ import com.marksixinfo.bean.Base64UrlData;
 import com.marksixinfo.bean.ClientInfo;
 import com.marksixinfo.bean.ReleaseLoadImage;
 import com.marksixinfo.bean.SettingData;
+import com.marksixinfo.constants.NumberConstants;
 import com.marksixinfo.constants.StringConstants;
 import com.marksixinfo.evenbus.CleanCacheEvent;
 import com.marksixinfo.interfaces.SucceedCallBackListener;
@@ -84,9 +85,6 @@ public class SettingActivity extends MarkSixWhiteActivity implements SucceedCall
     private CommonInputDialog commonInputDialog;
     private ReleaseUtils releaseUtils;
     private List<LocalMedia> selectList = new ArrayList<>();
-    private final int nickNameLength = 20;//昵称最大字符长度
-    private final int signatureLength = 20;//网址最大长度
-    private final int emailLength = 50;//邮箱最大长度
     private SimpleDialog simpleDialog;
 
     @Override
@@ -316,7 +314,7 @@ public class SettingActivity extends MarkSixWhiteActivity implements SucceedCall
                 releaseUtils.setPermission(this, this);
                 break;
             case R.id.ll_nike_name://修改昵称
-                setNickNameMaxLength(nickNameLength);
+                setNickNameMaxLength(NumberConstants.NICK_NAME_LENGTH);
                 String Nickname = llNikeName.getValue();
                 EditText editText2 = commonInputDialog.getEditText();
                 editText2.removeTextChangedListener(TextChangedListener.textWatcher);
@@ -338,7 +336,7 @@ public class SettingActivity extends MarkSixWhiteActivity implements SucceedCall
                 }).setTextViewInput(Nickname);
                 break;
             case R.id.ll_email://修改邮箱
-                setEmailMaxLength(emailLength);
+                setEmailMaxLength(NumberConstants.EMAIL_LENGTH);
                 String mEmail = tvEmail.getValue();
                 EditText editText1 = commonInputDialog.getEditText();
                 if (editText1 != null) {
@@ -374,7 +372,7 @@ public class SettingActivity extends MarkSixWhiteActivity implements SucceedCall
                 EditText editText = inputDialog.getEditText();
                 if (editText != null) {
                     //限制长度
-                    editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(signatureLength), new EmojiFilter()});
+                    editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(NumberConstants.DOMAIN_LENGTH), new EmojiFilter()});
                     //不能输入中文
                     TextChangedListener.StringWatcher(editText);
                 }
@@ -407,7 +405,7 @@ public class SettingActivity extends MarkSixWhiteActivity implements SucceedCall
             case R.id.ll_version://版本更新
                 break;
             case R.id.ll_standby://备用网址
-                startClass(R.string.StandbyRemarkActivity);
+                startClass(R.string.StandbyDomainActivity);
 //                break;
         }
     }

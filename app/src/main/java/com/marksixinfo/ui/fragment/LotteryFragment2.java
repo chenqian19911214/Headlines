@@ -43,6 +43,7 @@ import com.marksixinfo.widgets.LotteryCurrentNumber;
 import com.marksixinfo.widgets.LotteryNextTimeDownView;
 import com.marksixinfo.widgets.LotteryPeriodLinearLayout;
 import com.marksixinfo.widgets.SwitchButton;
+import com.marksixinfo.widgets.TimeDownView;
 import com.marksixinfo.widgets.pagergridlayoutmanager.PagerConfig;
 import com.marksixinfo.widgets.pagergridlayoutmanager.PagerGridLayoutManager;
 import com.marksixinfo.widgets.pagergridlayoutmanager.PagerGridSnapHelper;
@@ -273,11 +274,17 @@ public class LotteryFragment2 extends PageBaseFragment implements PagerGridLayou
             if (l > 0) {
                 nextTimeDownView.stop();
                 nextTimeDownView.start(l * 1000);
+                nextTimeDownView.setOnTimeEndListener(new TimeDownView.OnTimeEndListener() {
+                    @Override
+                    public void onEnd() {
+                        getData();//9:20准备开奖,socket推open:1,开始开奖,未推直接刷新
+                    }
+                });
             }
-//            setCurrentLottery(now);
+            setCurrentLottery(now);
 //            setCurrentLottery(1558790399);//21:19:59
 //            setCurrentLottery(1558790966);// 21:29:26
-            setCurrentLottery(1558870106);// 2019-05-26 19:28:26
+//            setCurrentLottery(1558870106);// 2019-05-26 19:28:26
         }
     }
 
@@ -718,10 +725,9 @@ public class LotteryFragment2 extends PageBaseFragment implements PagerGridLayou
         if (event != null && type == 0) {
             LotteryRealTimeData data = event.getMessage();
             if (data != null) {
-                List<String> lottery = data.getLottery();
-                if (lottery != null && lottery.size() > 0 && lottery.size() < 7) {//进入开奖
-                    setRealTimeFragment(event);
-                }
+                int isOpen = data.getIsOpen();
+                //0,晚上9点20 后台开始重置  1,准备开奖,弹框提醒  2,开球中   3,开奖结束
+                setCurrentLotteryType(isOpen == 0 ? 600 * 1000 : 0, isOpen, event);
             }
         }
     }
@@ -735,27 +741,39 @@ public class LotteryFragment2 extends PageBaseFragment implements PagerGridLayou
         if (CommonUtils.StringNotNull(value)) {
             LotteryRealTimeEvent data = CommonUtils.getRealTimeData(value);
             if (data != null) {
-                int type = data.getType();//0,晚上9点20 后台开始重置  1,准备开奖,弹框提醒  2,开球中   3,开奖结束
-                switch (type) {
-                    case 0://开始倒计时
-                        long time = CommonUtils.getTodayNineTime(now);
-                        if (time > 0) {//开始倒计时
-                            data.setType(1);
-                            data.setShowTime(time);
-                            setRealTimeFragment(data);
-                        }
-                        break;
-                    case 1://弹框提醒
-                        ((MainActivity) getActivity()).setRemindDialog();
-                        break;
-                    case 2://开球中
-                        data.setType(2);
-                        setRealTimeFragment(data);
-                        break;
-                    case 3://开奖结束
-                        break;
+                int type = data.getType();
+                long time = CommonUtils.getTodayNineTime(now);
+                if (time > 0) {
+                    setCurrentLotteryType(time, type, data);
                 }
             }
+        }
+    }
+
+    /**
+     * 设置当前开奖type
+     *
+     * @param time
+     * @param type 0,晚上9点20 后台开始重置  1,准备开奖,弹框提醒  2,开球中   3,开奖结束
+     * @param data
+     */
+    private void setCurrentLotteryType(long time, int type, LotteryRealTimeEvent data) {
+        switch (type) {
+            case 0://开始倒计时
+                if (time > 0) {//开始倒计时
+                    data.setType(1);
+                    data.setShowTime(time);
+                    setRealTimeFragment(data);
+                }
+                break;
+            case 1://弹框提醒,准备开球
+                ((MainActivity) getActivity()).setRemindDialog();
+            case 2://开球中
+                data.setType(2);
+                setRealTimeFragment(data);
+                break;
+            case 3://开奖结束
+                break;
         }
     }
 }

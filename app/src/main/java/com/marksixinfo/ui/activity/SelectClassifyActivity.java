@@ -184,6 +184,7 @@ public class SelectClassifyActivity extends MarkSixActivity implements
         new HeadlineImpl(new MarkSixNetCallBack<List<SelectClassifyData>>(this, SelectClassifyData.class) {
             @Override
             public void onSuccess(List<SelectClassifyData> response, int id) {
+                tvEditFinish.setVisibility(View.VISIBLE);
                 setData(response, isInit);
             }
             @Override
@@ -211,7 +212,6 @@ public class SelectClassifyActivity extends MarkSixActivity implements
         list.add(0, CommonUtils.getDefault());
         notifyClassifyData();
         if (CommonUtils.ListNotNull(list)) {
-            tvEditFinish.setVisibility(View.VISIBLE);
             mLoadingLayout.showContent();
         } else {
             mLoadingLayout.showEmpty();

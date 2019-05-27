@@ -110,4 +110,19 @@ public interface NumberConstants {
      * 头条搜索用户显示数量
      */
     int SEARCH_USER_COUNT = 6;
+
+    /**
+     * 邮箱最大长度
+     */
+    int EMAIL_LENGTH = 50;
+
+    /**
+     * 昵称最大字符长度
+     */
+    int NICK_NAME_LENGTH = 20;
+
+    /**
+     * 网址最大长度
+     */
+    int DOMAIN_LENGTH = 20;
 }

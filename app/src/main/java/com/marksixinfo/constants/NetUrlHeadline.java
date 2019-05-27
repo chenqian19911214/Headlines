@@ -90,6 +90,16 @@ public interface NetUrlHeadline {
     String SEARCH_RESULT = HOST + "search&A=get_list";
 
     /**
+     * 获取搜索期数
+     */
+    String GET_SEARCH_PERIOD = HOST + "search&A=get_period";
+
+    /**
+     * 获取搜索用户/头条
+     */
+    String GET_SEARCH_USER_RESULT = HOST + "search&A=get_list_user";
+
+    /**
      * 回帖
      */
     String COMMENTS = HOST + "bbs&A=reply";

@@ -17,7 +17,7 @@
 
 
         <RelativeLayout
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/rl_select_period"
             android:layout_width="81dp"
             android:layout_height="match_parent">
@@ -40,7 +40,6 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_weight="1"
             android:background="@drawable/shape_search_edit">

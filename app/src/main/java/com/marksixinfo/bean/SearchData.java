@@ -12,7 +12,7 @@ import java.util.List;
 public class SearchData {
 
     private List<MainHomeData> list;
-    private List<MineConcernData> user;
+    private List<MineConcernData> member;
 
     public List<MainHomeData> getList() {
         return list;
@@ -22,11 +22,11 @@ public class SearchData {
         this.list = list;
     }
 
-    public List<MineConcernData> getUser() {
-        return user;
+    public List<MineConcernData> getMember() {
+        return member;
     }
 
-    public void setUser(List<MineConcernData> user) {
-        this.user = user;
+    public void setMember(List<MineConcernData> member) {
+        this.member = member;
     }
 }

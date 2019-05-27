@@ -2,16 +2,20 @@ package com.marksixinfo.ui.fragment;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.marksixinfo.R;
 import com.marksixinfo.adapter.SearchResultAdapter;
 import com.marksixinfo.adapter.SearchUserAdapter;
+import com.marksixinfo.base.IntentUtils;
 import com.marksixinfo.base.MarkSixFragment;
 import com.marksixinfo.base.MarkSixNetCallBack;
 import com.marksixinfo.bean.LikeAndFavoriteData;
 import com.marksixinfo.bean.MainHomeData;
 import com.marksixinfo.bean.MineConcernData;
+import com.marksixinfo.bean.SearchData;
+import com.marksixinfo.constants.NumberConstants;
 import com.marksixinfo.constants.StringConstants;
 import com.marksixinfo.evenbus.CommListDataEvent;
 import com.marksixinfo.interfaces.IMainHomeRecommend;
@@ -20,6 +24,7 @@ import com.marksixinfo.net.impl.HeadlineImpl;
 import com.marksixinfo.ui.activity.SearchActivity;
 import com.marksixinfo.utils.CommonUtils;
 import com.marksixinfo.utils.EventBusUtil;
+import com.marksixinfo.utils.JSONUtils;
 import com.marksixinfo.widgets.LoadingLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -30,7 +35,6 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -58,8 +62,10 @@ public class SearchResultFragment extends MarkSixFragment implements IMainHomeRe
     private SearchResultAdapter adapter;
     private int pageIndex = 0;//页数
     private String keyword = "";
+    private String currentPeriod = "";
     private SearchUserAdapter userAdapter;
     private List<MineConcernData> user;
+    private LinearLayout llData;
 
     @Override
     public int getViewId() {
@@ -79,7 +85,7 @@ public class SearchResultFragment extends MarkSixFragment implements IMainHomeRe
 
         assert getContext() != null;
         adapter = new SearchResultAdapter(getContext(), list, this);
-//        listView.addHeaderView(headView);
+        listView.addHeaderView(headView);
         listView.setAdapter(adapter);
         mLoadingLayout.setRetryListener(this);
 
@@ -105,7 +111,10 @@ public class SearchResultFragment extends MarkSixFragment implements IMainHomeRe
      * @param headView
      */
     private void initHeadView(View headView) {
+        llData = headView.findViewById(R.id.ll_data);
+        llData.setVisibility(View.GONE);
         RecyclerView recyclerView = headView.findViewById(R.id.recyclerView);
+        recyclerView.getParent().requestDisallowInterceptTouchEvent(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         userAdapter = new SearchUserAdapter(getContext(), userList, this);
         recyclerView.setAdapter(userAdapter);
@@ -129,10 +138,6 @@ public class SearchResultFragment extends MarkSixFragment implements IMainHomeRe
         if (isInit) {
             refresh(true);
         } else {
-//            if (refreshLayout != null) {
-//                //触发自动刷新
-//                refreshLayout.autoRefresh();
-//            }
             mLoadingLayout.showLoading();
             refresh(true);
         }
@@ -147,9 +152,9 @@ public class SearchResultFragment extends MarkSixFragment implements IMainHomeRe
         if (isRefresh) {
             pageIndex = 0;
         }
-        new HeadlineImpl(new MarkSixNetCallBack<List<MainHomeData>>(this, MainHomeData.class) {
+        new HeadlineImpl(new MarkSixNetCallBack<SearchData>(this, SearchData.class) {
             @Override
-            public void onSuccess(List<MainHomeData> response, int id) {
+            public void onSuccess(SearchData response, int id) {
                 setData(response, isRefresh);
             }
 
@@ -171,6 +176,27 @@ public class SearchResultFragment extends MarkSixFragment implements IMainHomeRe
         }.setNeedDialog(false)).getSearchResult(keyword, ++pageIndex);
     }
 
+    /**
+     * 设置搜索用户
+     *
+     * @param response
+     */
+    private void setSearchUser(List<MineConcernData> response) {
+        user = response;
+        userList.clear();
+        if (CommonUtils.ListNotNull(user)) {
+            if (user.size() > 6) {
+                userList.addAll(user.subList(0, NumberConstants.SEARCH_HISTORY_SIZE));
+            } else {
+                userList.addAll(user);
+            }
+            userAdapter.changeDataUi(this.userList);
+            llData.setVisibility(View.VISIBLE);
+        } else {
+            llData.setVisibility(View.GONE);
+        }
+    }
+
 
     /**
      * 请求完成
@@ -187,25 +213,23 @@ public class SearchResultFragment extends MarkSixFragment implements IMainHomeRe
     }
 
 
-    private void setData(List<MainHomeData> response, boolean isRefresh) {
+    private void setData(SearchData response, boolean isRefresh) {
         if (isRefresh) {
             list.clear();
         }
-        if (CommonUtils.ListNotNull(response)) {
-            list.addAll(response);
+        if (response != null && CommonUtils.ListNotNull(response.getList())) {
+            list.addAll(response.getList());
         } else {
             refreshLayout.finishLoadMoreWithNoMoreData();//将不会再次触发加载更多事件
+        }
+        if (isRefresh && response != null) {
+            List<MineConcernData> member = response.getMember();
+            setSearchUser(member);
         }
         if (adapter != null) {
             adapter.notifyUI(list);
         }
-//
-//        user = getUserList();
-//        userList.clear();
-//        userList.addAll(user.subList(0, NumberConstants.SEARCH_HISTORY_SIZE + 1));
-//        userAdapter.changeDataUi(this.userList);
-
-        if (CommonUtils.ListNotNull(list)) {
+        if (CommonUtils.ListNotNull(list) || llData.getVisibility() == View.VISIBLE) {
             mLoadingLayout.showContent();
             if (isRefresh) {
                 if (listView != null) {
@@ -445,8 +469,10 @@ public class SearchResultFragment extends MarkSixFragment implements IMainHomeRe
         if (event != null && event.getData() != null
                 && CommonUtils.ListNotNull(list) && adapter != null) {
             CommonUtils.commListDataChange(event.getData(), list);
-//            CommonUtils.mineConcernDataChange(event.getData(), userList);
             adapter.notifyUI(list);
+            if (CommonUtils.ListNotNull(userList)) {
+                CommonUtils.searchConcernDataChange(event.getData(), userList);
+            }
         }
     }
 
@@ -468,33 +494,17 @@ public class SearchResultFragment extends MarkSixFragment implements IMainHomeRe
      */
     @Override
     public void succeedCallBack(Integer o) {
-//        if (o != null && CommonUtils.ListNotNull(userList)) {
-//            if (o < NumberConstants.SEARCH_USER_COUNT) {//查看用户
-//                MineConcernData mineConcernData = userList.get(o);
-//                if (mineConcernData != null) {
-//                    goToUserCenterActivity(mineConcernData.getMember_Id(), 0);
-//                }
-//            } else {
-//                startClass(R.string.SearchUserListActivity, IntentUtils.getHashObj(new String[]{
-//                        StringConstants.DATA_LIST, JSONUtils.toJson(user)}));
-//            }
-//        }
-    }
-
-    private List<MineConcernData> getUserList() {
-        List<MineConcernData> dataList = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            MineConcernData mineConcernData = new MineConcernData();
-            mineConcernData.setLook_status(0);
-            mineConcernData.setHasViewLine(true);
-            mineConcernData.setFace("https://images.34399.com/files/20190411/1047552467527.png");
-            mineConcernData.setLevel(new Random().nextInt(3));
-            mineConcernData.setNickname("六合彩资料" + i);
-            mineConcernData.setMember_Id("3833");
-            mineConcernData.setRemark("www.123456789.com");
-            dataList.add(mineConcernData);
+        if (o != null && CommonUtils.ListNotNull(userList)) {
+            if (o < NumberConstants.SEARCH_USER_COUNT - 1) {//查看用户
+                MineConcernData mineConcernData = userList.get(o);
+                if (mineConcernData != null) {
+                    goToUserCenterActivity(mineConcernData.getId(), 0);
+                }
+            } else {
+                startClass(R.string.SearchUserListActivity, IntentUtils.getHashObj(new String[]{
+                        StringConstants.DATA_LIST, JSONUtils.toJson(user)}));
+            }
         }
-        return dataList;
     }
 }
 

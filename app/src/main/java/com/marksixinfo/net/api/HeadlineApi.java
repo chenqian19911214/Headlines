@@ -139,6 +139,15 @@ public interface HeadlineApi {
      */
     void getSearchResult(String keyword, int page);
 
+    /**
+     * 功能描述: 搜索获取期数
+     *
+     * @auther: Administrator
+     * @date: 2019/3/22 0022 13:10
+     */
+    void getSearchPeriod();
+
+
 
     /**
      * 功能描述: 回帖 - 回复帖子

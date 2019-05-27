@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.marksixinfo.R;
+import com.marksixinfo.utils.CommonUtils;
 
 
 public class GlideUtil {
@@ -65,7 +66,7 @@ public class GlideUtil {
     public static void loadRoundedImage(Context context, final Object src, final ImageView view) {
         if (getContextNotNull(context)) {
             GlideApp.with(context)
-                    .load(src)
+                    .load(checkUrl(src))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .apply(RequestOptions.bitmapTransform(new CircleCrop()))
                     .placeholder(PLACEHOLDER_DEFAULT)
@@ -78,7 +79,7 @@ public class GlideUtil {
     public static void loadImage(Context context, final Object src, final ImageView view, int width, int height) {
         if (getContextNotNull(context)) {
             GlideApp.with(context)
-                    .load(src)
+                    .load(checkUrl(src))
                     .override(width, height)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(PLACEHOLDER_DEFAULT)
@@ -90,7 +91,7 @@ public class GlideUtil {
     public static void loadImage(Context context, final Object src, final ImageView view) {
         if (getContextNotNull(context)) {
             GlideApp.with(context)
-                    .load(src)
+                    .load(checkUrl(src))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(PLACEHOLDER_DEFAULT)
                     .error(PLACEHOLDER_DEFAULT)
@@ -101,7 +102,7 @@ public class GlideUtil {
     public static void loadCircleImage(Context context, final Object src, final ImageView view, int placeholder) {
         if (getContextNotNull(context)) {
             GlideApp.with(context)
-                    .load(src)
+                    .load(checkUrl(src))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .apply(RequestOptions.bitmapTransform(new CircleCrop()))
                     .placeholder(placeholder)
@@ -113,7 +114,7 @@ public class GlideUtil {
     public static void loadRoundedImage(Context context, final Object src, final ImageView view, int corners) {
         if (getContextNotNull(context)) {
             GlideApp.with(context)
-                    .load(src)
+                    .load(checkUrl(src))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .apply(new RequestOptions().transforms(new CenterCrop(), new RoundedCorners(corners)))
                     .placeholder(PLACEHOLDER_DEFAULT)
@@ -126,7 +127,7 @@ public class GlideUtil {
     public static void loadImage(Context context, final Object src, final ImageView view, int placeholder) {
         if (getContextNotNull(context)) {
             GlideApp.with(context)
-                    .load(src)
+                    .load(checkUrl(src))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(placeholder)
                     .error(placeholder)
@@ -138,7 +139,7 @@ public class GlideUtil {
     public static void loadImageNoError(Context context, final Object src, final ImageView view) {
         if (getContextNotNull(context)) {
             GlideApp.with(context)
-                    .load(src)
+                    .load(checkUrl(src))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(view);
         }
@@ -148,7 +149,7 @@ public class GlideUtil {
     public static void loadImage(Context context, final Object src, final ImageView view, RequestListener<Drawable> listener) {
         if (getContextNotNull(context)) {
             GlideApp.with(context)
-                    .load(src)
+                    .load(checkUrl(src))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(PLACEHOLDER_DEFAULT)
                     .error(PLACEHOLDER_DEFAULT)
@@ -160,13 +161,29 @@ public class GlideUtil {
     public static void loadImage(Context context, final Object src, final SimpleTarget<Drawable> target) {
         if (src != null) {
             GlideApp.with(context)
-                    .load(src)
+                    .load(checkUrl(src))
                     .thumbnail(0.1f)
                     .placeholder(PLACEHOLDER_DEFAULT)
                     .error(PLACEHOLDER_DEFAULT)
                     .into(target);
         }
     }
+
+    /**
+     *  加载网络连接判断地址
+     * @param src
+     * @return
+     */
+    private static Object checkUrl(Object src) {
+        if (src != null && src instanceof String) {
+            String url = (String) src;
+            if (CommonUtils.StringNotNull(url) && CommonUtils.isContainsHttp(url)) {
+                return url;
+            }
+        }
+        return src;
+    }
+
 
     private static boolean getContextNotNull(Context context) {
         if (context != null) {
@@ -194,7 +211,7 @@ public class GlideUtil {
         try {
             return GlideApp.with(context)
                     .asBitmap()
-                    .load(url)
+                    .load(checkUrl(url))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .submit(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                     .get();

@@ -30,10 +30,18 @@ public class MineConcernAndFansAdapter extends RecyclerView.Adapter<ViewHolder> 
     private List<MineConcernData> list;
     private IMineConcernInterface listener;
     private Context mContext;
+    private boolean goneTopViewLine;
 
     public MineConcernAndFansAdapter(Context mContext, List<MineConcernData> list, IMineConcernInterface listener) {
         this.mContext = mContext;
         this.list = list;
+        this.listener = listener;
+    }
+
+    public MineConcernAndFansAdapter(Context mContext, List<MineConcernData> list, boolean goneTopViewLine, IMineConcernInterface listener) {
+        this.mContext = mContext;
+        this.list = list;
+        this.goneTopViewLine = goneTopViewLine;
         this.listener = listener;
     }
 
@@ -54,17 +62,17 @@ public class MineConcernAndFansAdapter extends RecyclerView.Adapter<ViewHolder> 
         String add_time = mineConcernData.getAdd_Time();
         String Nickname = mineConcernData.getNickname();
         String face = mineConcernData.getFace();
-        String id = mineConcernData.getMember_Id();
+        String id = mineConcernData.getId();
+        String memberId = mineConcernData.getMember_Id();
         int level = mineConcernData.getLevel();
         int look_status = mineConcernData.getLook_status();
         String remark = mineConcernData.getRemark();
-        boolean hasViewLine = mineConcernData.isHasViewLine();
 
         ImageView mIvOfficial = holder.getView(R.id.iv_official);
         ConcernTextView mTvConcern = holder.getView(R.id.tv_concern);
         TextView mTvUserDomain = holder.getView(R.id.tv_user_domain);
 
-        holder.setVisible(R.id.view_line, position == 0 && !hasViewLine);
+        holder.setVisible(R.id.view_line, position == 0 && !goneTopViewLine);
 
         holder.setCircleImageView(R.id.iv_user_photo, face);
 
@@ -98,7 +106,7 @@ public class MineConcernAndFansAdapter extends RecyclerView.Adapter<ViewHolder> 
             @Override
             public void onClick(View view) {
                 if (listener != null) {
-                    listener.checkUser(id);
+                    listener.checkUser(CommonUtils.StringNotNull(memberId) ? memberId : id);
                 }
             }
         });

@@ -88,6 +88,6 @@
     <!--头条搜索更多用户-->
     <string name="SearchUserListActivity">searchUserList</string>
     <!--备用域名编辑-->
-    <string name="StandbyRemarkActivity">standbyRemark</string>
+    <string name="StandbyDomainActivity">standbyDomain</string>
 
 </resources>

@@ -7,7 +7,7 @@ package com.marksixinfo.bean;
  * @Date: 2019/5/25 0025 14:59
  * @Description:
  */
-public class StandbyRemarkData {
+public class StandbyDomainData {
 
 
     private String Id;

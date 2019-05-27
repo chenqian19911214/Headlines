@@ -59,7 +59,7 @@ public class SearchUserListActivity extends MarkSixActivity implements IMineConc
 
         markSixTitle.init("相关用户");
 
-        adapter = new MineConcernAndFansAdapter(getContext(), list, this);
+        adapter = new MineConcernAndFansAdapter(getContext(), list, true, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
@@ -68,29 +68,46 @@ public class SearchUserListActivity extends MarkSixActivity implements IMineConc
 
 
     private void setData() {
-        String s = getStringParam(StringConstants.DATA_LIST);
-        if (CommonUtils.StringNotNull(s)) {
-            if (CommonUtils.StringNotNull(s)) {
-                ArrayList<MineConcernData> data = null;
-                try {
-                    data = JSONUtils.fromJson(s, new TypeToken<ArrayList<MineConcernData>>() {
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String s = getStringParam(StringConstants.DATA_LIST);
+                if (CommonUtils.StringNotNull(s)) {
+                    if (CommonUtils.StringNotNull(s)) {
+                        ArrayList<MineConcernData> data = null;
+                        try {
+                            data = JSONUtils.fromJson(s, new TypeToken<ArrayList<MineConcernData>>() {
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        if (CommonUtils.ListNotNull(data)) {
+                            list.addAll(data);
+                        }
+                    }
                 }
-                if (CommonUtils.ListNotNull(data)) {
-                    list.addAll(data);
+                notifyList();
+            }
+        }).start();
+    }
+
+    /**
+     * 刷新列表
+     */
+    private void notifyList() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (adapter != null) {
+                    adapter.notifyUI(list);
+                }
+                if (CommonUtils.ListNotNull(list)) {
+                    mLoadingLayout.showContent();
+                } else {
+                    mLoadingLayout.showEmpty();
                 }
             }
-        }
-        if (adapter != null) {
-            adapter.notifyUI(list);
-        }
-        if (CommonUtils.ListNotNull(list)) {
-            mLoadingLayout.showContent();
-        } else {
-            mLoadingLayout.showEmpty();
-        }
+        });
     }
 
     /**
@@ -104,7 +121,7 @@ public class SearchUserListActivity extends MarkSixActivity implements IMineConc
             if (listBean != null) {
                 int status = listBean.getLook_status();
                 listBean.setLook_status(-1);//接口中
-                String userId = listBean.getMember_Id();
+                String userId = listBean.getId();
                 new HeadlineImpl(new MarkSixNetCallBack<LikeAndFavoriteData>(this, LikeAndFavoriteData.class) {
                     @Override
                     public void onSuccess(LikeAndFavoriteData response, int id) {
@@ -144,7 +161,7 @@ public class SearchUserListActivity extends MarkSixActivity implements IMineConc
         if (event != null && event.getData() != null) {
             MainHomeData data = event.getData();
             if (CommonUtils.ListNotNull(list)) {
-                CommonUtils.mineConcernDataChange(data, list);
+                CommonUtils.searchConcernDataChange(data, list);
                 if (adapter != null) {
                     adapter.notifyUI(list);
                 }

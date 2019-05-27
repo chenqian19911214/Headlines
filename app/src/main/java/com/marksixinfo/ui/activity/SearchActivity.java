@@ -15,10 +15,12 @@ import android.widget.TextView;
 
 import com.marksixinfo.R;
 import com.marksixinfo.base.MarkSixActivity;
+import com.marksixinfo.base.MarkSixNetCallBack;
 import com.marksixinfo.bean.HistoryData;
 import com.marksixinfo.bean.ReleaseSelectData;
 import com.marksixinfo.constants.NumberConstants;
 import com.marksixinfo.constants.StringConstants;
+import com.marksixinfo.net.impl.HeadlineImpl;
 import com.marksixinfo.ui.fragment.SearchResultFragment;
 import com.marksixinfo.ui.fragment.SearchStartFragment;
 import com.marksixinfo.utils.CommonUtils;
@@ -62,7 +64,9 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
     String keyword = "";
     private SearchResultFragment searchResultFragment;
     private List<ReleaseSelectData> period = new ArrayList<>();
+    private List<String> periodString = new ArrayList<>();
     private ViewGroup.MarginLayoutParams params;
+    private String currentPeriod = "";
 
     @Override
     public int getViewId() {
@@ -99,7 +103,6 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
         mEditTextView.setOnClickListener(this);
 
         goToStart();
-        getAllPeriod();
 
     }
 
@@ -169,6 +172,7 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
         } else {
             if (searchResultFragment != null) {
                 searchResultFragment.startData(keyword, false);
+                saveHistory();
             }
             return;
         }
@@ -312,8 +316,11 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_select_period:
-//                toast("选择期数");
-                selectPeriod();
+                if (flSelectPeriod.getVisibility() == View.VISIBLE) {
+                    flSelectPeriod.setVisibility(View.GONE);
+                } else {
+                    getAllPeriod();
+                }
                 break;
             case R.id.tv_cancel:
                 if (CommonUtils.StringNotNull(keyword)) {
@@ -325,15 +332,45 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
         }
     }
 
+
+    /**
+     * 获取期数
+     */
     private void getAllPeriod() {
-        period.clear();
-        period.add(new ReleaseSelectData("0", "全部", true));
-        for (int i = 20; i > 1; i--) {
-            ReleaseSelectData releaseSelectData = new ReleaseSelectData();
-            releaseSelectData.setName(CommonUtils.fixThree(i + "") + "期");
-            releaseSelectData.setValue(i + "");
-            period.add(releaseSelectData);
+        new HeadlineImpl(new MarkSixNetCallBack<List<String>>(this, String.class) {
+            @Override
+            public void onSuccess(List<String> response, int id) {
+                setAllPeriod(response);
+            }
+        }).getSearchPeriod();
+    }
+
+
+    /**
+     * 设置所有期数
+     *
+     * @param response
+     */
+    private void setAllPeriod(List<String> response) {
+        if (response != null) {
+            if (!response.equals(periodString)) {
+                periodString = response;
+                autoFlowLayout.removeAllViews();
+                period.clear();
+                period.add(new ReleaseSelectData("0", "全部", true));
+                for (String s : response) {
+                    if (CommonUtils.StringNotNull(s)) {
+                        ReleaseSelectData releaseSelectData = new ReleaseSelectData();
+                        releaseSelectData.setName(CommonUtils.fixThree(s) + "期");
+                        period.add(releaseSelectData);
+                    }
+                }
+            }
+        } else {
+            period.clear();
+            period.add(new ReleaseSelectData("0", "全部", true));
         }
+        selectPeriod();
     }
 
 
@@ -341,33 +378,29 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
      * 设置期数选择
      */
     private void selectPeriod() {
-        if (flSelectPeriod.getVisibility() == View.VISIBLE) {
-            flSelectPeriod.setVisibility(View.GONE);
-        } else {
-            if (!CommonUtils.ListNotNull(autoFlowLayout.getAllTextView()) &&
-                    CommonUtils.ListNotNull(period)) {
-                for (int i = 0; i < period.size(); i++) {
-                    ReleaseSelectData data = period.get(i);
-                    if (data != null) {
-                        TextView textView = getPeriodTextView(data.getName());
-                        if (i == 0) {
-                            textView.setTextColor(0xfffc5c66);
-                        }
-                        autoFlowLayout.addView(textView);
+        if (!CommonUtils.ListNotNull(autoFlowLayout.getAllTextView()) &&
+                CommonUtils.ListNotNull(period)) {
+            for (int i = 0; i < period.size(); i++) {
+                ReleaseSelectData data = period.get(i);
+                if (data != null) {
+                    TextView textView = getPeriodTextView(data.getName());
+                    if (i == 0) {
+                        textView.setTextColor(0xfffc5c66);
                     }
+                    autoFlowLayout.addView(textView);
                 }
-                autoFlowLayout.setOnTextViewClickListener(this);
             }
-
-            flSelectPeriod.setVisibility(View.VISIBLE);
-
-            flSelectPeriod.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    flSelectPeriod.setVisibility(View.GONE);
-                }
-            });
+            autoFlowLayout.setOnTextViewClickListener(this);
         }
+
+        flSelectPeriod.setVisibility(View.VISIBLE);
+
+        flSelectPeriod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flSelectPeriod.setVisibility(View.GONE);
+            }
+        });
     }
 
     /**
@@ -399,9 +432,12 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
                 }
             }
             textView.setTextColor(0xfffc5c66);
-            String value = period.get(position).getValue();
+            currentPeriod = periodString.get(position + 1);//多一个全部
             String name = period.get(position).getName();
             tvSelectPeriod.setText(name);
+            if (index == 1) {//如果是搜索结果页,直接搜索
+                goToResult();
+            }
         }
     }
 }
