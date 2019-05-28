@@ -119,7 +119,7 @@ public class LotteryCurrentNumber extends ViewBase implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if (v7 != null) {
-            ScratchDialog scratchDialog = new ScratchDialog(this);
+            ScratchDialog scratchDialog = new ScratchDialog(getContext());
             scratchDialog.showDialog(v7, new SucceedCallBackListener<Boolean>() {
                 @Override
                 public void succeedCallBack(Boolean o) {

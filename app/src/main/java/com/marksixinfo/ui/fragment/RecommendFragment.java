@@ -1,5 +1,6 @@
 package com.marksixinfo.ui.fragment;
 
+import android.content.Context;
 import android.view.View;
 
 import com.marksixinfo.R;
@@ -117,12 +118,15 @@ public class RecommendFragment extends PageBaseFragment implements IMainHomeReco
      * 开始加载,下拉动画
      */
     private void startData() {
-        String recommendTag = SPUtil.getRecommendTag(getContext());
-        if (CommonUtils.StringNotNull(recommendTag)) {
-            //触发自动刷新
-            refreshLayout.autoRefresh();
-        } else {
-            getSignature();
+        Context context = getContext();
+        if (context != null) {
+            String recommendTag = SPUtil.getRecommendTag(context);
+            if (CommonUtils.StringNotNull(recommendTag)) {
+                //触发自动刷新
+                refreshLayout.autoRefresh();
+            } else {
+                getSignature();
+            }
         }
     }
 
