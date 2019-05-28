@@ -356,6 +356,8 @@ public class LotteryChartFragment extends PageBaseFragment implements
      */
     @Override
     public void changeSelect(int oldPosition, int newPosition) {
+        if(editPeriod==null)
+            return;
         if (oldPosition == type && editPeriod != null
                 && !oldNumber.equals(editPeriod.getText().toString().trim().replace("期", ""))) {
             editPeriod.setText(oldNumber + "期");
