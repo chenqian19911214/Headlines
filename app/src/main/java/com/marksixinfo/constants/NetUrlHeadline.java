@@ -24,7 +24,7 @@ public interface NetUrlHeadline {
      * 图片上传
      */
 //    String IMAGES_UPLOADING = "https://images.34399.com/";
-    String IMAGES_UPLOADING = "https://images.qz022.com/";
+    String IMAGES_UPLOADING = "http://images.qz022.com/";
 
     /**
      * 发送验证码
