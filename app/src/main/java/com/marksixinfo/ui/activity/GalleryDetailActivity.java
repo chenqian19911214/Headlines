@@ -92,7 +92,7 @@ public class GalleryDetailActivity extends MarkSixActivity implements View.OnCli
     /**
      * 上个界面传过来的
      * 用于点赞后回传 刷新
-     * */
+     */
     private int listPosition;
     private String titleName;
     private List<SelectPictureData> responseData;
@@ -105,7 +105,7 @@ public class GalleryDetailActivity extends MarkSixActivity implements View.OnCli
 
     @Override
     public void afterViews() {
-        //markSixTitle.init("", "", "发布图解", 0, this);
+        //markSixTitle.init("图库详情", "", "发布图解", 0, this);
         markSixTitle.init("图库详情", "", "", 0, this);
         galleryId = getStringParam(StringConstants.ID);
         periodId = getStringParam(StringConstants.PERIOD);
@@ -146,7 +146,7 @@ public class GalleryDetailActivity extends MarkSixActivity implements View.OnCli
                         "StringName", titleName
                 };
                 HashMap<String, String> hashMap = IntentUtils.getHashObj(listData);
-                if (checkLogin(R.string.GalleryExplainReleaseActivity,hashMap)){
+                if (checkLogin(R.string.GalleryExplainReleaseActivity, hashMap)) {
                     startClass(R.string.GalleryExplainReleaseActivity, hashMap);
                 }
                 break;
@@ -245,17 +245,17 @@ public class GalleryDetailActivity extends MarkSixActivity implements View.OnCli
     public void onClicks(View view) {
         switch (view.getId()) {
             case R.id.more_years: //选择更多年份
-                if (CommonUtils.ListNotNull(responseData)){
-                    if (pvCustomOptions!=null){
-                        if (!pvCustomOptions.isDialog()){
+                if (CommonUtils.ListNotNull(responseData)) {
+                    if (pvCustomOptions != null) {
+                        if (!pvCustomOptions.isDialog()) {
                             showYearDialog();
-                        }else {
+                        } else {
                             pvCustomOptions.dismiss();
                         }
-                    }else {
+                    } else {
                         showYearDialog();
                     }
-                }else {
+                } else {
                     getSelectPicture(true);
                 }
                 break;
@@ -381,7 +381,7 @@ public class GalleryDetailActivity extends MarkSixActivity implements View.OnCli
         new GalleryImpl(new MarkSixNetCallBack<List<SelectPictureData>>(this, SelectPictureData.class) {
             @Override
             public void onSuccess(List<SelectPictureData> response, int id) {
-               // mLoadingLayout.showContent();
+                // mLoadingLayout.showContent();
                 if (response != null) {
                     responseData = response;
                     if (isShow)
@@ -391,7 +391,7 @@ public class GalleryDetailActivity extends MarkSixActivity implements View.OnCli
 
             @Override
             public void onError(String ms, String code) {
-             //   super.onError(msg, code);
+                //   super.onError(msg, code);
 
             }
         }.setNeedDialog(isShow)).getSelectPeriod();
