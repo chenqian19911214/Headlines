@@ -63,7 +63,7 @@ public class RecommendFragment extends PageBaseFragment implements IMainHomeReco
     private MainHomeAdapter adapter;
     private boolean isClean = false;//是否清空list,重新登录清空推荐
     private final int DELAYED_TIME = 1000;//加载缓存后延时加载网络
-    private final int FINISH_DURATION = 2000;//下拉推荐完成时间
+    private final int FINISH_DURATION = 700;//下拉推荐完成时间
     private MyClassicsHeader classicsHeader;
     private int lastTimeIndex;//上次查看位置
 
@@ -677,11 +677,13 @@ public class RecommendFragment extends PageBaseFragment implements IMainHomeReco
      * 获取推荐列表标识
      */
     private void getSignature() {
+        mLoadingLayout.showLoading();
         new HeadlineImpl(new MarkSixNetCallBack<String>(this, String.class) {
             @Override
             public void onSuccess(String response, int id) {
                 if (CommonUtils.StringNotNull(response)) {
                     SPUtil.setRecommendTag(getContext(), response);
+                    mLoadingLayout.showContent();
                     startData();
                 } else {
                     onConnectFail();

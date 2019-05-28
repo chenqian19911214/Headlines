@@ -13,7 +13,8 @@ public interface StringConstants {
     /**
      * 全局host
      */
-    String Main_Host = "293211.com/";//上线
+//    String Main_Host = "293211.com/";//上线
+    String Main_Host = "353386.com/";//上线
 //    String Main_Host = "lhtt.co/";//测试
 
     /**

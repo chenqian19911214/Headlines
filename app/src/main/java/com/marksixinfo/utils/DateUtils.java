@@ -346,6 +346,7 @@ public class DateUtils {
     public static  long stringToLong(String s, String format){
         if (CommonUtils.StringNotNull(s,format)) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
                 try {
                     Date parse = simpleDateFormat.parse(s);
                     return parse.getTime();

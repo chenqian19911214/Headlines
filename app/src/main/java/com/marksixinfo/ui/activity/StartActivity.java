@@ -12,13 +12,9 @@ import com.marksixinfo.constants.NumberConstants;
 import com.marksixinfo.service.WebSocketService;
 import com.marksixinfo.utils.CommonUtils;
 import com.marksixinfo.utils.JSONUtils;
-import com.marksixinfo.utils.LogUtils;
 import com.marksixinfo.utils.SPUtil;
 import com.marksixinfo.utils.UIUtils;
-import com.zhangke.websocket.SimpleListener;
-import com.zhangke.websocket.SocketListener;
 import com.zhangke.websocket.WebSocketHandler;
-import com.zhangke.websocket.response.ErrorResponse;
 
 import java.util.ArrayList;
 
@@ -48,7 +44,7 @@ public class StartActivity extends ActivityBase {
         UIUtils.setTranslucentStatus(this, true);//将图片顶到状态栏
         UIUtils.hideBottomUIMenu(this);
         initLotteryConfig();
-        WebSocketHandler.getDefault().addListener(socketListener);
+//        WebSocketHandler.getDefault().addListener(socketListener);
         WebSocketHandler.getDefault().reconnect();//手动重连
 //        ivBackground.postDelayed(new Runnable() {
 //            @Override
@@ -132,22 +128,22 @@ public class StartActivity extends ActivityBase {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        WebSocketHandler.getDefault().removeListener(socketListener);
+//        WebSocketHandler.getDefault().removeListener(socketListener);
     }
 
-    private SocketListener socketListener = new SimpleListener() {
-
-        @Override
-        public void onSendDataError(ErrorResponse errorResponse) {
-            errorResponse.release();
-            LogUtils.d("onSendDataError:" + errorResponse.toString());
-        }
-
-        @Override
-        public <T> void onMessage(String message, T d) {
-//            StartActivity.this.onMessage(message);
-            LogUtils.d("onMessage(String, T):" + message);
-            CommonUtils.setCurrentLottery(getApplicationContext(), message);
-        }
-    };
+//    private SocketListener socketListener = new SimpleListener() {
+//
+//        @Override
+//        public void onSendDataError(ErrorResponse errorResponse) {
+//            errorResponse.release();
+//            LogUtils.d("onSendDataError:" + errorResponse.toString());
+//        }
+//
+//        @Override
+//        public <T> void onMessage(String message, T d) {
+////            StartActivity.this.onMessage(message);
+//            LogUtils.d("onMessage(String, T):" + message);
+//            CommonUtils.setCurrentLottery(getApplicationContext(), message);
+//        }
+//    };
 }

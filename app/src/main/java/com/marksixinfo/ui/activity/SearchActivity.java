@@ -20,6 +20,7 @@ import com.marksixinfo.bean.HistoryData;
 import com.marksixinfo.bean.ReleaseSelectData;
 import com.marksixinfo.constants.NumberConstants;
 import com.marksixinfo.constants.StringConstants;
+import com.marksixinfo.evenbus.LotteryRealTimeOverEvent;
 import com.marksixinfo.interfaces.SucceedCallBackListener;
 import com.marksixinfo.net.impl.HeadlineImpl;
 import com.marksixinfo.ui.fragment.SearchResultFragment;
@@ -31,6 +32,9 @@ import com.marksixinfo.utils.UIUtils;
 import com.marksixinfo.widgets.AutoFlowLayout;
 import com.marksixinfo.widgets.CleanEditTextView;
 import com.marksixinfo.widgets.easyemoji.KeyBoardUtils;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -331,7 +335,11 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
                 if (flSelectPeriod.getVisibility() == View.VISIBLE) {
                     flSelectPeriod.setVisibility(View.GONE);
                 } else {
-                    getAllPeriod();
+                    if (!CommonUtils.ListNotNull(periodString)) {
+                        getAllPeriod(true);
+                    } else {
+                        selectPeriod(true);
+                    }
                 }
                 break;
             case R.id.tv_cancel:
@@ -349,13 +357,13 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
     /**
      * 获取期数
      */
-    private void getAllPeriod() {
+    private void getAllPeriod(boolean isDialog) {
         new HeadlineImpl(new MarkSixNetCallBack<List<String>>(this, String.class) {
             @Override
             public void onSuccess(List<String> response, int id) {
-                setAllPeriod(response);
+                setAllPeriod(response, isDialog);
             }
-        }).getSearchPeriod();
+        }.setNeedDialog(isDialog)).getSearchPeriod();
     }
 
 
@@ -364,11 +372,14 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
      *
      * @param response
      */
-    private void setAllPeriod(List<String> response) {
+    private void setAllPeriod(List<String> response, boolean isDialog) {
         if (response != null) {
+            if (!isDialog) {
+                periodString.clear();
+            }
             if (!CommonUtils.ListNotNull(periodString)) {
-                autoFlowLayout.removeAllViews();
                 period.clear();
+                autoFlowLayout.removeAllTextView();
                 periodString.addAll(response);
                 periodString.add(0, "0");
                 period.add(new ReleaseSelectData("0", "全部", true));
@@ -384,16 +395,15 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
             period.clear();
             period.add(new ReleaseSelectData("0", "全部", true));
         }
-        selectPeriod();
+        selectPeriod(isDialog);
     }
 
 
     /**
      * 设置期数选择
      */
-    private void selectPeriod() {
-        if (!CommonUtils.ListNotNull(autoFlowLayout.getAllTextView()) &&
-                CommonUtils.ListNotNull(period)) {
+    private void selectPeriod(boolean isDialog) {
+        if (autoFlowLayout.getChildCount() <= 0 && CommonUtils.ListNotNull(period)) {
             for (int i = 0; i < period.size(); i++) {
                 ReleaseSelectData data = period.get(i);
                 if (data != null) {
@@ -406,15 +416,16 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
             }
             autoFlowLayout.setOnTextViewClickListener(this);
         }
+        if (isDialog) {
+            flSelectPeriod.setVisibility(View.VISIBLE);
 
-        flSelectPeriod.setVisibility(View.VISIBLE);
-
-        flSelectPeriod.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                flSelectPeriod.setVisibility(View.GONE);
-            }
-        });
+            flSelectPeriod.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    flSelectPeriod.setVisibility(View.GONE);
+                }
+            });
+        }
     }
 
     /**
@@ -452,6 +463,18 @@ public class SearchActivity extends MarkSixActivity implements TextView.OnEditor
             if (index == 1) {//如果是搜索结果页,直接搜索
                 goToResult();
             }
+        }
+    }
+
+    /**
+     * 实时开奖结束通知
+     *
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(LotteryRealTimeOverEvent event) {
+        if (event != null) {
+            getAllPeriod(false);
         }
     }
 }

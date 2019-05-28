@@ -12,13 +12,19 @@ import android.widget.TextView;
 
 import com.marksixinfo.R;
 import com.marksixinfo.base.MarkSixFragment;
+import com.marksixinfo.base.MarkSixNetCallBack;
 import com.marksixinfo.bean.ClientInfo;
+import com.marksixinfo.bean.LotteryCountDownData;
 import com.marksixinfo.bean.LotteryNumberConfigData;
 import com.marksixinfo.bean.LotteryRealTimeData;
 import com.marksixinfo.constants.StringConstants;
 import com.marksixinfo.evenbus.LotteryRealTimeEvent;
+import com.marksixinfo.evenbus.LotteryRealTimeOverEvent;
 import com.marksixinfo.interfaces.SucceedCallBackListener;
+import com.marksixinfo.net.impl.LotteryImpl;
+import com.marksixinfo.ui.activity.MainActivity;
 import com.marksixinfo.utils.CommonUtils;
+import com.marksixinfo.utils.EventBusUtil;
 import com.marksixinfo.utils.JSONUtils;
 import com.marksixinfo.utils.LogUtils;
 import com.marksixinfo.utils.NumberUtils;
@@ -93,10 +99,11 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
     private String[] myNumbers = new String[]{"一", "二", "三", "四", "五", "六"};
     private String[] scoreText = {"   ", ".  ", ".. ", "..."};
     private int pauseTime = 5;//开出球停顿时间, 秒
-    private int overTime = 36000000;//开奖结束,页面停留时间, 毫秒
+    private int overTime = 3600;//开奖结束,页面停留时间, 秒
     private int type;
     private boolean isScratch = true;//是否需要刮奖
     private List<String> lottery;
+    private ValueAnimator valueAnimator;
 
     @Override
     public int getViewId() {
@@ -110,42 +117,7 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
         if (bundle != null) {
             LotteryRealTimeEvent data = bundle.getParcelable(StringConstants.LOTTERY_REAL_TIME);
             if (data != null) {
-                //0,开奖结束   1,准备开奖    2,开奖中
-                type = data.getType();
-                LotteryRealTimeData message = data.getMessage();
-                if (message != null) {
-                    String period = message.getPeriod();
-                    tvPeriodNumberName.setText(CommonUtils.StringNotNull(period) ? "第" + period + "期" : "");
-                }
-                GlideUtil.loadImage(getContext(), R.drawable.gif_lottery_animator, ivLotteryIng, R.drawable.toumingtu_head);
-                setTvLotteryIngAnimator();
-                if (type == 1) {
-                    long showTime = data.getShowTime();
-                    if (showTime > 0) {
-                        ivStart.setVisibility(View.VISIBLE);
-                        llLotteryStart.setVisibility(View.VISIBLE);
-                        ivLotteryIng.setVisibility(View.INVISIBLE);
-                        tvLotteryIng.setVisibility(View.INVISIBLE);
-                        timeDownView.start(showTime);
-                        timeDownView.setOnTimeEndListener(new TimeDownView.OnTimeEndListener() {
-                            @Override
-                            public void onEnd() {
-                                if (type == 1) {
-                                    startLottery();
-                            }
-                            }
-                        });
-                    }
-                } else if (type == 2) {
-                    if (message != null) {
-                        List<String> lottery = message.getLottery();
-                        setIvLotteryIng(lottery);
-                    }
-                } else {//结束
-                    if (listener != null) {
-                        listener.succeedCallBack(null);
-                    }
-                }
+                setData(data);
             }
         }
 
@@ -157,16 +129,84 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
         });
     }
 
+    private void setData(LotteryRealTimeEvent data) {
+        //0,开奖结束   1,准备开奖    2,开奖中
+        type = data.getType();
+        LotteryRealTimeData message = data.getMessage();
+        if (message != null) {
+            String period = message.getPeriod();
+            tvPeriodNumberName.setText(CommonUtils.StringNotNull(period) ? "第" + period + "期" : "");
+        }
+        GlideUtil.loadImage(getContext(), R.drawable.gif_lottery_animator, ivLotteryIng, R.drawable.toumingtu_head);
+        setTvLotteryIngAnimator();
+        if (type == 1) {
+            long showTime = data.getShowTime();
+            setShowTimeStatus();
+            setShowTime(showTime);
+        } else if (type == 2) {
+            if (message != null) {
+                List<String> lottery = message.getLottery();
+                setIvLotteryIng(lottery);
+            }
+        } else {//结束
+            if (listener != null) {
+                listener.succeedCallBack(null);
+            }
+        }
+    }
+
+
     /**
      * 进入开奖
      */
     private void startLottery() {
+        scratchView.setVisibility(View.INVISIBLE);
+        rlLotteryResult.setVisibility(View.INVISIBLE);
         llLotteryStart.setVisibility(View.INVISIBLE);
         ivStart.setVisibility(View.INVISIBLE);
         llLotteryDetail.setVisibility(View.INVISIBLE);
         ivLotteryIng.setVisibility(View.VISIBLE);
         tvLotteryIng.setVisibility(View.VISIBLE);
+        tvCurrentNumber.setVisibility(View.VISIBLE);
         tvCurrentNumber.setText("第一球");
+    }
+
+    /**
+     * 设置倒计时
+     *
+     * @param showTime
+     */
+    private void setShowTime(long showTime) {
+        if (showTime > 0) {
+            timeDownView.stop();
+            timeDownView.start(showTime);
+            timeDownView.setOnTimeEndListener(new TimeDownView.OnTimeEndListener() {
+                @Override
+                public void onEnd() {
+                    startLottery();
+                }
+            });
+        } else {
+            startLottery();
+        }
+    }
+
+    /**
+     * 设置倒计时状态
+     */
+    private void setShowTimeStatus() {
+        if (type != 1) {
+            type = 1;
+        }
+        timeDownView.setStopTimeInit();
+        ivStart.setVisibility(View.VISIBLE);
+        scratchView.setVisibility(View.INVISIBLE);
+        tvCurrentNumber.setVisibility(View.INVISIBLE);
+        llLotteryStart.setVisibility(View.VISIBLE);
+        rlLotteryResult.setVisibility(View.INVISIBLE);
+        ivLotteryIng.setVisibility(View.INVISIBLE);
+        llLotteryDetail.setVisibility(View.INVISIBLE);
+        tvLotteryIng.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -238,7 +278,7 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
                     tvDanshuang.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (current < 7) {
+                            if (current < 7 && type == 2) {
                                 ivLotteryIng.setVisibility(View.VISIBLE);
                                 tvLotteryIng.setVisibility(View.VISIBLE);
                                 rlLotteryResult.setVisibility(View.INVISIBLE);
@@ -266,6 +306,7 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
     private void setTemaData() {
         if (isScratch) {//需要刮奖
             scratchView.setVisibility(View.VISIBLE);
+            scratchView.reset();
             SpannableStringUtils sp = new SpannableStringUtils();
             sp.addText(20, 0xffE61E27, "特码");
             sp.addText(20, 0xff333333, "已开，请手动刮奖");
@@ -304,11 +345,13 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
                         listener.succeedCallBack(null);
                     }
                 }
-            }, overTime);
+            }, overTime * 1000);
         } else {
             tvCurrentNumber.setText("特码");
             overLottery();
         }
+        //实时开奖结束通知
+        EventBusUtil.post(new LotteryRealTimeOverEvent());
     }
 
     /**
@@ -319,11 +362,14 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
             tvCurrentNumber.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    if (current < 7) {//刮奖结束重新开奖
+                        return;
+                    }
                     if (listener != null) {
                         listener.succeedCallBack(null);
                     }
                 }
-            }, 5000);
+            }, 4000);
             toast("开奖结束,亲~中奖了吗");
             SPUtil.setStringValue(getContext(), SPUtil.LOTTERY_CURRENT, "");
         }
@@ -340,15 +386,95 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
             LotteryRealTimeData data = event.getMessage();
             if (data != null) {
                 String period = data.getPeriod();
+                setPeriodText(period);
                 int isOpen = data.getIsOpen();
-                tvPeriodNumberName.setText(CommonUtils.StringNotNull(period) ? "第" + period + "期" : "");
-                List<String> lottery = data.getLottery();
-                setIvLotteryIng(lottery);
-                SPUtil.setStringValue(getContext(), SPUtil.LOTTERY_CURRENT, isOpen == 2 ? JSONUtils.toJson(event) : "");
+                setCurrentLotteryType(isOpen, event);
             } else {
                 SPUtil.setStringValue(getContext(), SPUtil.LOTTERY_CURRENT, "");
             }
         }
+    }
+
+    /**
+     * 设置开奖期数显示
+     *
+     * @param period
+     */
+    private void setPeriodText(String period) {
+        if (tvPeriodNumberName != null) {
+            tvPeriodNumberName.setText(CommonUtils.StringNotNull(period) ? "第" + period + "期" : "");
+        }
+    }
+
+    /**
+     * 获取距离开奖秒数
+     */
+    private void getCountDown() {
+        new LotteryImpl(new MarkSixNetCallBack<LotteryCountDownData>(this, LotteryCountDownData.class) {
+            @Override
+            public void onSuccess(LotteryCountDownData response, int id) {
+                setCountDown(response);
+            }
+        }.setNeedDialog(false)).getCountdown();
+    }
+
+
+    /**
+     * 重新开奖获取倒计时
+     *
+     * @param response
+     */
+    private void setCountDown(LotteryCountDownData response) {
+        if (response != null) {
+            long now = response.getNow();
+            long time = CommonUtils.getTodayNineTime(now);
+            setShowTime(time);
+        }
+    }
+
+    /**
+     * 设置当前开奖type
+     *
+     * @param type 0,晚上9点20 后台开始重置  1,准备开奖,弹框提醒  2,开球中   3,开奖结束
+     * @param data
+     */
+    private void setCurrentLotteryType(int type, LotteryRealTimeEvent data) {
+        switch (type) {
+            case 0://重置,倒计时
+                SwitchButtonLottery.setChecked(true);
+                reSetNumberDataStatus();
+                setShowTimeStatus();
+                getCountDown();
+                break;
+            case 1://弹框提醒,准备开球
+                reSetNumberDataStatus();
+                startLottery();
+                ((MainActivity) getActivity()).setRemindDialog();
+                break;
+            case 2://开球中
+            case 3://开奖结束
+                if (current >= 7) {
+                    return;
+                }
+                data.setType(2);
+                LotteryRealTimeData message = data.getMessage();
+                List<String> lottery = message.getLottery();
+                setIvLotteryIng(lottery);
+                SPUtil.setStringValue(getContext(), SPUtil.LOTTERY_CURRENT, type == 2 ? JSONUtils.toJson(data) : "");
+                break;
+        }
+    }
+
+    /**
+     * 重置号码状态
+     */
+    private void reSetNumberDataStatus() {
+        if (lotteryRealTimeNumber != null) {
+            lotteryRealTimeNumber.reSetStatus();
+        }
+        SwitchButtonLottery.setClickable(true);
+        timeDownView.stop();
+        current = 0;
     }
 
     public void setListener(SucceedCallBackListener listener) {
@@ -392,7 +518,10 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
      * 设置等待中动画
      */
     private void setTvLotteryIngAnimator() {
-        ValueAnimator valueAnimator = ValueAnimator.ofInt(0, 4).setDuration(2000);
+        if (valueAnimator != null) {
+            valueAnimator.cancel();
+        }
+        valueAnimator = ValueAnimator.ofInt(0, 4).setDuration(2000);
         valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override

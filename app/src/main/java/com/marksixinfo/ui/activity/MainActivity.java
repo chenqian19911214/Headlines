@@ -213,7 +213,7 @@ public class MainActivity extends MarkSixActivity {
     }
 
     /**
-     * 实时开奖中双击退出断开连接,下次启动重连
+     * 实时开奖中双击退出断开连接,下次启动重连,确保接收到最新数据
      */
     private void setRealLottery() {
         String value = SPUtil.getStringValue(getContext(), SPUtil.LOTTERY_CURRENT);

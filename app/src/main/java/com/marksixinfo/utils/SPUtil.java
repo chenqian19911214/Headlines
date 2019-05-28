@@ -29,7 +29,7 @@ public class SPUtil {
     public static final String TASK_SIGN_IN = "task_sign_in"; //签到时间
     public static final String INVITATION_CODE = "invitation_code"; //邀请码
     public static final String LOTTERY_SCRATCH = "lottery_scratch"; //开奖页面是否开启刮奖
-    public static final String LOTTERY_CURRENT = "lottery_current"; //当前开奖号码
+    public static final String LOTTERY_CURRENT = "lottery_current_data"; //当前开奖号码
 
 
     public static String getStringValue(Context context, String key) {

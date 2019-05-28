@@ -15,7 +15,6 @@ import com.bigkoo.pickerview.listener.CustomListener;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.google.android.material.appbar.AppBarLayout;
-import com.marksixinfo.BuildConfig;
 import com.marksixinfo.R;
 import com.marksixinfo.adapter.LotteryPeriodAdapter;
 import com.marksixinfo.adapter.LotteryTitleNavigatorAdapter;
@@ -44,7 +43,6 @@ import com.marksixinfo.widgets.LotteryNextTimeDownView;
 import com.marksixinfo.widgets.LotteryPeriodLinearLayout;
 import com.marksixinfo.widgets.SwitchButton;
 import com.marksixinfo.widgets.TimeDownView;
-import com.marksixinfo.widgets.pagergridlayoutmanager.PagerConfig;
 import com.marksixinfo.widgets.pagergridlayoutmanager.PagerGridLayoutManager;
 import com.marksixinfo.widgets.pagergridlayoutmanager.PagerGridSnapHelper;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -142,7 +140,7 @@ public class LotteryFragment2 extends PageBaseFragment implements PagerGridLayou
         pageSnapHelper.attachToRecyclerView(recyclerView);
 
         // 如果需要查看调试日志可以设置为true，一般情况忽略即可
-        PagerConfig.setShowLog(BuildConfig.DEBUG);
+//        PagerConfig.setShowLog(BuildConfig.DEBUG);
 
         periodAdapter = new LotteryPeriodAdapter(this, periodList, this);
         recyclerView.setAdapter(periodAdapter);
@@ -172,7 +170,7 @@ public class LotteryFragment2 extends PageBaseFragment implements PagerGridLayou
      * 获取数据
      */
     private void getData() {
-        getCountDown();
+        getCountDown(true);
         new LotteryImpl(new MarkSixNetCallBack<LotteryBaseData>(this, LotteryBaseData.class) {
             @Override
             public void onSuccess(LotteryBaseData response, int id) {
@@ -251,11 +249,11 @@ public class LotteryFragment2 extends PageBaseFragment implements PagerGridLayou
     /**
      * 获取距离开奖秒数
      */
-    private void getCountDown() {
+    private void getCountDown(boolean isSetTimeDown) {
         new LotteryImpl(new MarkSixNetCallBack<LotteryCountDownData>(this, LotteryCountDownData.class) {
             @Override
             public void onSuccess(LotteryCountDownData response, int id) {
-                setCountDown(response);
+                setCountDown(response, isSetTimeDown);
             }
         }.setNeedDialog(false).setNeedToast(false)).getCountdown();
     }
@@ -265,21 +263,23 @@ public class LotteryFragment2 extends PageBaseFragment implements PagerGridLayou
      *
      * @param countDown
      */
-    private void setCountDown(LotteryCountDownData countDown) {
+    private void setCountDown(LotteryCountDownData countDown, boolean isSetTimeDown) {
         if (countDown != null) {
-            long time = countDown.getTime();
-            nextPeriod = countDown.getPeriod();
             long now = countDown.getNow();
-            long l = Math.abs(time);
-            if (l > 0) {
-                nextTimeDownView.stop();
-                nextTimeDownView.start(l * 1000);
-                nextTimeDownView.setOnTimeEndListener(new TimeDownView.OnTimeEndListener() {
-                    @Override
-                    public void onEnd() {
-                        getData();//9:20准备开奖,socket推open:1,开始开奖,未推直接刷新
-                    }
-                });
+            if (isSetTimeDown) {
+                long time = countDown.getTime();
+                nextPeriod = countDown.getPeriod();
+                long l = Math.abs(time);
+                if (l > 0) {
+                    nextTimeDownView.stop();
+                    nextTimeDownView.start(l * 1000);
+                    nextTimeDownView.setOnTimeEndListener(new TimeDownView.OnTimeEndListener() {
+                        @Override
+                        public void onEnd() {
+                            getData();//9:20准备开奖,socket推open:1,开始开奖,未推直接刷新
+                        }
+                    });
+                }
             }
             setCurrentLottery(now);
 //            setCurrentLottery(1558790399);//21:19:59
@@ -727,7 +727,11 @@ public class LotteryFragment2 extends PageBaseFragment implements PagerGridLayou
             if (data != null) {
                 int isOpen = data.getIsOpen();
                 //0,晚上9点20 后台开始重置  1,准备开奖,弹框提醒  2,开球中   3,开奖结束
-                setCurrentLotteryType(isOpen == 0 ? 600 * 1000 : 0, isOpen, event);
+                if (isOpen == 0) {
+                    getCountDown(false);
+                } else {
+                    setCurrentLotteryType(0, isOpen, event);
+                }
             }
         }
     }

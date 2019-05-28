@@ -1954,15 +1954,18 @@ public class CommonUtils {
      * @return
      */
     public static long getTodayNineTime(long now) {
-        now *= 1000;
-        String s = DateUtils.covertDateToSpanceStringToHMS(now);//2019-05-25 21:28:26
-        String[] split = s.split(" ");
-        long time = DateUtils.stringToLong(split[0] + " 21:30:00", DateUtils.SHORT_DATE_FORMAT_HOURS_MINUTE_SECOND);
-        time -= now;
-        if (time > 0) {
-            return time;
+        long time = -1;
+        try {
+            now *= 1000;
+            String s = DateUtils.covertDateToSpanceStringToHMS(now);//2019-05-25 21:28:26
+            String[] split = s.split(" ");
+            time = DateUtils.stringToLong(split[0] + " 21:30:00", DateUtils.SHORT_DATE_FORMAT_HOURS_MINUTE_SECOND);
+            time -= now;
+            LogUtils.d("转换时间___" + s + "____时间___" + time);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return -1;
+        return time;
     }
 
 

@@ -30,6 +30,7 @@ public class LotteryRealTimeNumber extends ViewBase {
 
     private List<View> views;
     private List<View> cards;
+    private int cardHeight;
 
     public LotteryRealTimeNumber(Context context) {
         super(context);
@@ -52,6 +53,7 @@ public class LotteryRealTimeNumber extends ViewBase {
     public void afterViews(View v) {
         views = new ArrayList<>();
         cards = new ArrayList<>();
+        cardHeight = UIUtils.dip2px(getContext(), 50);
         views.add(v.findViewById(R.id.view_v1));
         views.add(v.findViewById(R.id.view_v2));
         views.add(v.findViewById(R.id.view_v3));
@@ -94,12 +96,24 @@ public class LotteryRealTimeNumber extends ViewBase {
     }
 
     /**
+     * 恢复已开
+     */
+    public void reSetStatus() {
+        if (CommonUtils.ListNotNull(cards)) {
+            for (View card : cards) {
+                card.getLayoutParams().height = cardHeight;
+                card.requestLayout();
+                card.setVisibility(VISIBLE);
+            }
+        }
+    }
+
+    /**
      * 开奖动画
      *
      * @param cardView
      */
     private void setGoneView(View cardView) {
-        int i = UIUtils.dip2px(getContext(), 50);
         ValueAnimator animator = ValueAnimator.ofInt(100, 0);
         animator.setDuration(1000);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -107,7 +121,7 @@ public class LotteryRealTimeNumber extends ViewBase {
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 int animatedValue = (int) valueAnimator.getAnimatedValue();
 //                cardView.setAlpha((animatedValue / 100f));
-                cardView.getLayoutParams().height = (int) ((animatedValue / 100f) * i);
+                cardView.getLayoutParams().height = (int) ((animatedValue / 100f) * cardHeight);
                 cardView.requestLayout();
                 if (animatedValue <= 0) {
                     cardView.setVisibility(GONE);

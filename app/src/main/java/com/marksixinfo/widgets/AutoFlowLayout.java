@@ -247,4 +247,11 @@ public class AutoFlowLayout extends ViewGroup implements View.OnClickListener {
         return list;
     }
 
+
+    public void removeAllTextView() {
+        removeAllViews();
+        mAllViews.clear();
+        mLineHeight.clear();
+        invalidate();
+    }
 }

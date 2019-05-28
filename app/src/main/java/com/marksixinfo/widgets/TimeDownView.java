@@ -216,6 +216,22 @@ public class TimeDownView extends RelativeLayout implements Runnable {
         }
     }
 
+    /**
+     * 设置初始
+     */
+    public void setStopTimeInit() {
+        if (timedown_day != null) {
+            timedown_day.setText("--");
+        }
+        if (timedown_hour != null
+                && timedown_min != null
+                && timedown_second != null) {
+            timedown_hour.setText("--");
+            timedown_min.setText("--");
+            timedown_second.setText("--");
+        }
+    }
+
     private long mPauseStartTime = 0;
     private long mPauseEndTime = 0;
 
