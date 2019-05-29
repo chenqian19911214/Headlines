@@ -222,7 +222,11 @@ public abstract class FragmentBase extends Fragment {
             return;
         }
         if (getChildFragmentManager() != null) {
-            getChildFragmentManager().beginTransaction().remove(fragment).commitAllowingStateLoss();
+            try {
+                getChildFragmentManager().beginTransaction().remove(fragment).commitAllowingStateLoss();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

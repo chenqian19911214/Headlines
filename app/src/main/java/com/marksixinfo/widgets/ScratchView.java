@@ -280,25 +280,25 @@ public class ScratchView extends View {
         matrix.postScale(sx, sy);
         LogUtils.d(TAG, "sx=" + sx);
         LogUtils.d(TAG, "sy=" + sy);
-
-        Bitmap bitmap = Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
-                matrix, true).copy(Bitmap.Config.ARGB_8888, true);
+        try {
+            Bitmap bitmap = Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                    matrix, true).copy(Bitmap.Config.ARGB_8888, true);
 
 //        Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), maskBgReseId)
 //                .copy(Bitmap.Config.ARGB_8888, true);
 
-        mMaskBitmap = bitmap;
-        mMaskCanvas = new Canvas(mMaskBitmap);
-        try {
+            mMaskBitmap = bitmap;
+            mMaskCanvas = new Canvas(mMaskBitmap);
+
             drawable.setBounds(0, 0, width, height);
             drawable.draw(mMaskCanvas);
+
+            LogUtils.d(TAG, "bitmap.getWidth()=" + bitmap.getWidth());
+            LogUtils.d(TAG, "bitmap.getHeight()=" + bitmap.getHeight());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        LogUtils.d(TAG, "bitmap.getWidth()=" + bitmap.getWidth());
-        LogUtils.d(TAG, "bitmap.getHeight()=" + bitmap.getHeight());
-
         if (mWatermark != null) {
             Rect rect = new Rect(0, 0, width, height);
             Rect bounds = new Rect(rect);

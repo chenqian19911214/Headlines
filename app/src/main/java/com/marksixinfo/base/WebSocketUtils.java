@@ -30,7 +30,7 @@ public class WebSocketUtils {
     /**
      * 超时时间 毫秒
      */
-    private static int connectTimeout = 15000;
+    private static int connectTimeout = 0;
 
     /**
      * 设置心跳间隔时间

@@ -435,7 +435,7 @@ public class ActivityPresent extends NetPresenterBase {
     public void gotoMainActivity(int index) {
         Activity currentActivity = ActivityManager.getActivityManager().getCurrentActivity();
         EventBusUtil.post(new MainActivityIndexEvent(index));
-        if (!MainActivity.class.equals(currentActivity.getClass())) {
+        if (currentActivity != null && !MainActivity.class.equals(currentActivity.getClass())) {
             ActivityManager.getActivityManager().popAllActivityExceptOne(MainActivity.class);
         }
     }

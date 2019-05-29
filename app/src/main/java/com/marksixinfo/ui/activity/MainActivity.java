@@ -277,10 +277,10 @@ public class MainActivity extends MarkSixActivity {
      */
     public void setRemindDialog() {
         Activity currentActivity = ActivityManager.getActivityManager().getCurrentActivity();
-        if (!MainActivity.class.equals(currentActivity.getClass())) {
+        if (currentActivity != null && !MainActivity.class.equals(currentActivity.getClass())) {
             showRemindDialog(currentActivity);
         } else {
-            if (((MainActivity) currentActivity).getPosition() != 2) {
+            if (currentActivity != null && ((MainActivity) currentActivity).getPosition() != 2) {
                 showRemindDialog(currentActivity);
             }
         }
@@ -307,7 +307,7 @@ public class MainActivity extends MarkSixActivity {
      */
     private void showEditionDialog(EditionNameDate editionNameDater) {
         Activity currentActivity = ActivityManager.getActivityManager().getCurrentActivity();
-        if (!currentActivity.isFinishing()) {
+        if (currentActivity != null && !currentActivity.isFinishing()) {
             if (updateDialog == null || !updateDialog.isShowing()) {
                 updateDialog = new EditionDialog((ActivityIntentInterface) currentActivity, editionNameDater);
                 updateDialog.show();

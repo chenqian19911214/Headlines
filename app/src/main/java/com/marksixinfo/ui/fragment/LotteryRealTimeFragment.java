@@ -308,7 +308,12 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
     private void setTemaData() {
         if (isScratch) {//需要刮奖
             scratchView.setVisibility(View.VISIBLE);
-            scratchView.reset();
+            scratchView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    scratchView.reset();
+                }
+            }, 200);
             SpannableStringUtils sp = new SpannableStringUtils();
             sp.addText(20, 0xffE61E27, "特码");
             sp.addText(20, 0xff333333, "已开，请手动刮奖");
@@ -374,7 +379,7 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
             }, 4000);
             //开奖页面才提示
             Activity currentActivity = ActivityManager.getActivityManager().getCurrentActivity();
-            if (MainActivity.class.equals(currentActivity.getClass())) {
+            if (currentActivity != null && MainActivity.class.equals(currentActivity.getClass())) {
                 if (((MainActivity) currentActivity).getPosition() == 2) {
                     toast("开奖结束,亲~中奖了吗");
                 }
