@@ -375,7 +375,7 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
             //开奖页面才提示
             Activity currentActivity = ActivityManager.getActivityManager().getCurrentActivity();
             if (MainActivity.class.equals(currentActivity.getClass())) {
-                if (((MainActivity) currentActivity).getPosition() != 2) {
+                if (((MainActivity) currentActivity).getPosition() == 2) {
                     toast("开奖结束,亲~中奖了吗");
                 }
             }
