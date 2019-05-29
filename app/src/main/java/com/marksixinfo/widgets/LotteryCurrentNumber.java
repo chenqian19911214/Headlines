@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.marksixinfo.R;
 import com.marksixinfo.base.ViewBase;
 import com.marksixinfo.bean.LotteryBaseData;
+import com.marksixinfo.interfaces.ActivityIntentInterface;
 import com.marksixinfo.interfaces.SucceedCallBackListener;
 import com.marksixinfo.utils.CommonUtils;
 
@@ -33,6 +34,7 @@ public class LotteryCurrentNumber extends ViewBase implements View.OnClickListen
     private boolean isScratch = true;
     private LotteryBaseData.LotteryBean.VBean v7;
     private SucceedCallBackListener<Boolean> listener;
+    private ScratchDialog scratchDialog;
 
     public LotteryCurrentNumber(Context context) {
         super(context);
@@ -119,7 +121,7 @@ public class LotteryCurrentNumber extends ViewBase implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if (v7 != null) {
-            ScratchDialog scratchDialog = new ScratchDialog(getContext());
+            scratchDialog = new ScratchDialog((ActivityIntentInterface) getContext());
             scratchDialog.showDialog(v7, new SucceedCallBackListener<Boolean>() {
                 @Override
                 public void succeedCallBack(Boolean o) {
@@ -143,6 +145,12 @@ public class LotteryCurrentNumber extends ViewBase implements View.OnClickListen
         } else {
             card_scratch.setVisibility(GONE);
             view_v7.setVisibility(VISIBLE);
+        }
+    }
+
+    public void dismissDialog() {
+        if (scratchDialog != null && scratchDialog.isShowing()) {
+            scratchDialog.dismiss();
         }
     }
 }

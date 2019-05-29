@@ -295,11 +295,10 @@ public class MainActivity extends MarkSixActivity {
             return;
         }
         if (!currentActivity.isFinishing()) {
-            if (remindDialog != null && remindDialog.isShowing()) {
-                remindDialog.dismiss();
+            if (remindDialog == null || !remindDialog.isShowing()) {
+                remindDialog = new LotteryRemindDialog((ActivityIntentInterface) currentActivity);
+                remindDialog.show();
             }
-            remindDialog = new LotteryRemindDialog((ActivityIntentInterface) currentActivity);
-            remindDialog.show();
         }
     }
 

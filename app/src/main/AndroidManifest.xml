@@ -75,9 +75,11 @@
             android:value="portrait|landscape" />
 
         <!-- 配置 Bugly -->
-    <!--    <meta-data
+        <!--
+            <meta-data
             android:name="BUGLY_APPID"
-            android:value="5e01abe88f" />-->
+            android:value="5e01abe88f" />
+        -->
         <!-- 配置APP版本号 -->
         <!--
             <meta-data

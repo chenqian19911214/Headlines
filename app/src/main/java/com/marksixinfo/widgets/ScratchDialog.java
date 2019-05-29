@@ -1,14 +1,14 @@
 package com.marksixinfo.widgets;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.marksixinfo.R;
+import com.marksixinfo.base.DialogBase;
 import com.marksixinfo.bean.LotteryBaseData;
+import com.marksixinfo.interfaces.ActivityIntentInterface;
 import com.marksixinfo.interfaces.SucceedCallBackListener;
 import com.marksixinfo.utils.CommonUtils;
 import com.marksixinfo.utils.LogUtils;
@@ -20,32 +20,38 @@ import com.marksixinfo.utils.LogUtils;
  * @Date: 2019/5/11 0011 15:34
  * @Description:
  */
-public class ScratchDialog extends Dialog implements View.OnClickListener {
+public class ScratchDialog extends DialogBase implements View.OnClickListener {
 
 
     private RelativeLayout rlBackground;
     private TextView rlNumber;
     private TextView tvShengXiao;
     private ScratchView scratchView;
-    private SucceedCallBackListener<Boolean> listener;
 
-    public ScratchDialog(Context context) {
+    public ScratchDialog(ActivityIntentInterface context) {
         super(context, R.style.ScratchDialog);
-        init(context);
     }
 
-    public ScratchDialog(Context context, int themeResId) {
-        super(context, themeResId);
+    public ScratchDialog(ActivityIntentInterface context, int theme) {
+        super(context, theme);
     }
 
-    public ScratchDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {
+    protected ScratchDialog(ActivityIntentInterface context, boolean cancelable, OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
     }
 
-    public void setListener(SucceedCallBackListener<Boolean> listener) {
-        this.listener = listener;
-    }
 
+    @Override
+    public void initView() {
+        setView(R.layout.dialog_scratch_view);
+        setCancelable(true);
+        setCanceledOnTouchOutside(false);
+        rlBackground = findViewById(R.id.rl_background);
+        findViewById(R.id.iv_close).setOnClickListener(this);
+        rlNumber = findViewById(R.id.rl_number);
+        tvShengXiao = findViewById(R.id.tv_sheng_xiao);
+        scratchView = findViewById(R.id.scratchView);
+    }
 
     /**
      * 显示刮奖弹框
@@ -55,7 +61,6 @@ public class ScratchDialog extends Dialog implements View.OnClickListener {
     public void showDialog(LotteryBaseData.LotteryBean.VBean v, SucceedCallBackListener<Boolean> listener) {
         if (v != null) {
             super.show();
-            this.listener = listener;
             String num = v.getNum();
             String shengxiao = v.getShengxiao();
             String style = v.getStyle();
@@ -74,7 +79,7 @@ public class ScratchDialog extends Dialog implements View.OnClickListener {
 
                 @Override
                 public void onProgress(int percent) {
-                    LogUtils.d(percent + "");
+                    LogUtils.d("percent___" + percent);
                     if (percent >= 65 && !isClear) {
                         isClear = true;
                         scratchView.clear();
@@ -98,19 +103,6 @@ public class ScratchDialog extends Dialog implements View.OnClickListener {
                 }
             });
         }
-    }
-
-    public void init(Context context) {
-//        setView();
-        View view = View.inflate(context, R.layout.dialog_scratch_view, null);
-        setContentView(view);
-        setCancelable(true);
-        setCanceledOnTouchOutside(false);
-        rlBackground = view.findViewById(R.id.rl_background);
-        view.findViewById(R.id.iv_close).setOnClickListener(this);
-        rlNumber = view.findViewById(R.id.rl_number);
-        tvShengXiao = view.findViewById(R.id.tv_sheng_xiao);
-        scratchView = view.findViewById(R.id.scratchView);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.marksixinfo.ui.fragment;
 
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.marksixinfo.evenbus.LotteryRealTimeOverEvent;
 import com.marksixinfo.interfaces.SucceedCallBackListener;
 import com.marksixinfo.net.impl.LotteryImpl;
 import com.marksixinfo.ui.activity.MainActivity;
+import com.marksixinfo.utils.ActivityManager;
 import com.marksixinfo.utils.CommonUtils;
 import com.marksixinfo.utils.EventBusUtil;
 import com.marksixinfo.utils.JSONUtils;
@@ -99,7 +101,7 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
     private String[] myNumbers = new String[]{"一", "二", "三", "四", "五", "六"};
     private String[] scoreText = {"   ", ".  ", ".. ", "..."};
     private int pauseTime = 5;//开出球停顿时间, 秒
-    private int overTime = 3600;//开奖结束,页面停留时间, 秒
+    private int overTime = 600;//开奖结束,页面停留时间, 秒
     private int type;
     private boolean isScratch = true;//是否需要刮奖
     private List<String> lottery;
@@ -370,7 +372,13 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
                     }
                 }
             }, 4000);
-            toast("开奖结束,亲~中奖了吗");
+            //开奖页面才提示
+            Activity currentActivity = ActivityManager.getActivityManager().getCurrentActivity();
+            if (MainActivity.class.equals(currentActivity.getClass())) {
+                if (((MainActivity) currentActivity).getPosition() != 2) {
+                    toast("开奖结束,亲~中奖了吗");
+                }
+            }
             SPUtil.setStringValue(getContext(), SPUtil.LOTTERY_CURRENT, "");
         }
     }
@@ -446,21 +454,18 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
                 setShowTimeStatus();
                 getCountDown();
                 break;
-            case 1://弹框提醒,准备开球
-                reSetNumberDataStatus();
-                startLottery();
+            case 1://弹框提醒,准备开球,如果有球,直接开球
                 ((MainActivity) getActivity()).setRemindDialog();
-                break;
             case 2://开球中
-            case 3://开奖结束
-                if (current >= 7) {
-                    return;
-                }
                 data.setType(2);
                 LotteryRealTimeData message = data.getMessage();
                 List<String> lottery = message.getLottery();
                 setIvLotteryIng(lottery);
-                SPUtil.setStringValue(getContext(), SPUtil.LOTTERY_CURRENT, type == 2 ? JSONUtils.toJson(data) : "");
+                SPUtil.setStringValue(getContext(), SPUtil.LOTTERY_CURRENT, JSONUtils.toJson(data));
+                break;
+            case 3://开奖结束
+                current = 7;
+                overLottery();
                 break;
         }
     }

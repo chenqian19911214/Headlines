@@ -79,7 +79,7 @@ public class LotteryFragment2 extends PageBaseFragment implements PagerGridLayou
     @BindView(R.id.SwitchButton_lottery)
     SwitchButton SwitchButtonLottery;
     @BindView(R.id.LotteryCurrentView)
-    LotteryCurrentNumber LotteryCurrentView;
+    LotteryCurrentNumber lotteryCurrentNumber;
     @BindView(R.id.tv_current_year)
     TextView tvCurrentYear;
     @BindView(R.id.btn_up_page)
@@ -225,10 +225,10 @@ public class LotteryFragment2 extends PageBaseFragment implements PagerGridLayou
      */
     private void setLottery(LotteryBaseData.LotteryBean lottery) {
         if (lottery != null) {
-            LotteryCurrentView.setData(lottery, new SucceedCallBackListener<Boolean>() {
+            lotteryCurrentNumber.setData(lottery, new SucceedCallBackListener<Boolean>() {
                 @Override
                 public void succeedCallBack(Boolean o) {
-                    LotteryCurrentView.setScratch(false);
+                    lotteryCurrentNumber.setScratch(false);
                 }
             });
             String period = lottery.getPeriod();
@@ -239,7 +239,7 @@ public class LotteryFragment2 extends PageBaseFragment implements PagerGridLayou
             SwitchButtonLottery.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    LotteryCurrentView.setScratch(isChecked);
+                    lotteryCurrentNumber.setScratch(isChecked);
                     SPUtil.setBooleanValue(getContext(), SPUtil.LOTTERY_SCRATCH, isChecked);
                 }
             });
@@ -308,6 +308,7 @@ public class LotteryFragment2 extends PageBaseFragment implements PagerGridLayou
     private void setRealTimeFragment(LotteryRealTimeEvent data) {
         if (type == 0) {//未进入开奖
             type = 1;//开奖中
+            lotteryCurrentNumber.dismissDialog();
             realTimeFragment = new LotteryRealTimeFragment();
             realTimeFragment.setListener(new SucceedCallBackListener() {
                 @Override
@@ -333,10 +334,10 @@ public class LotteryFragment2 extends PageBaseFragment implements PagerGridLayou
         if (SPUtil.getSharedPreferences(getContext()).contains(SPUtil.LOTTERY_SCRATCH)) {
             boolean booleanValue = SPUtil.getBooleanValue(getContext(), SPUtil.LOTTERY_SCRATCH);
             SwitchButtonLottery.setChecked(booleanValue);
-            LotteryCurrentView.setScratch(booleanValue);
+            lotteryCurrentNumber.setScratch(booleanValue);
         } else {
             SwitchButtonLottery.setChecked(true);
-            LotteryCurrentView.setScratch(true);
+            lotteryCurrentNumber.setScratch(true);
             SPUtil.setBooleanValue(getContext(), SPUtil.LOTTERY_SCRATCH, true);
         }
     }

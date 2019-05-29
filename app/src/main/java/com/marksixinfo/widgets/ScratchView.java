@@ -290,7 +290,7 @@ public class ScratchView extends View {
         mMaskBitmap = bitmap;
         mMaskCanvas = new Canvas(mMaskBitmap);
         try {
-            drawable.setBounds(0, 0, width,height);
+            drawable.setBounds(0, 0, width, height);
             drawable.draw(mMaskCanvas);
         } catch (Exception e) {
             e.printStackTrace();
@@ -373,7 +373,7 @@ public class ScratchView extends View {
 
             @Override
             protected Boolean doInBackground(Integer... params) {
-                if(isCancelled()){
+                if (isCancelled()) {
                     return true;
                 }
                 if (mMaskBitmap != null) {
@@ -389,7 +389,8 @@ public class ScratchView extends View {
                     float totalPixelCount = width * height;//总像素个数
 
                     for (int pos = 0; pos < totalPixelCount; pos++) {
-                        if (mPixels[pos] == 0) {//透明的像素值为0
+                        int i = mPixels[pos];
+                        if (i == 0 || i == -16777216) {//透明的像素值为0或者-16777216
                             erasePixelCount++;
                         }
                     }
@@ -425,7 +426,7 @@ public class ScratchView extends View {
             @Override
             protected void onCancelled(Boolean aBoolean) {
                 super.onCancelled(aBoolean);
-                LogUtils.d(aBoolean+"异步任务取消");
+                LogUtils.d(aBoolean + "异步任务取消");
             }
         };
         task.execute(width, height);
@@ -513,21 +514,21 @@ public class ScratchView extends View {
     /**
      * 擦除状态监听器
      */
-    public  interface EraseStatusListener {
+    public interface EraseStatusListener {
 
         /**
          * 擦除进度
          *
          * @param percent 进度值，大于0，小于等于100；
          */
-         void onProgress(int percent);
+        void onProgress(int percent);
 
         /**
          * 擦除完成回调函数
          *
          * @param view
          */
-         void onCompleted(View view);
+        void onCompleted(View view);
     }
 
     @Override

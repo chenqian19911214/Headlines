@@ -24,6 +24,7 @@ public class WebSocketUtils {
 //    private static String connectUrl = "wss://echo.websocket.org/";
     //线上
 //    private static String connectUrl = "wss://www.sskk58.com:9200?type=lottery";
+            //测试
     private static String connectUrl = "wss://images.34399.com:9200?type=lottery";
 
     /**

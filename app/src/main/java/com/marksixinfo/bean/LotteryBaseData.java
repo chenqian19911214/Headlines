@@ -175,7 +175,7 @@ public class LotteryBaseData {
             this.Period = Period;
         }
 
-        public static class VBean {
+        public static class VBean implements Parcelable {
             /**
              * num : 44
              * shengxiao : 龙
@@ -209,6 +209,39 @@ public class LotteryBaseData {
             public void setStyle(String style) {
                 this.style = style;
             }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(this.num);
+                dest.writeString(this.shengxiao);
+                dest.writeString(this.style);
+            }
+
+            public VBean() {
+            }
+
+            protected VBean(Parcel in) {
+                this.num = in.readString();
+                this.shengxiao = in.readString();
+                this.style = in.readString();
+            }
+
+            public static final Parcelable.Creator<VBean> CREATOR = new Parcelable.Creator<VBean>() {
+                @Override
+                public VBean createFromParcel(Parcel source) {
+                    return new VBean(source);
+                }
+
+                @Override
+                public VBean[] newArray(int size) {
+                    return new VBean[size];
+                }
+            };
         }
 
     }
