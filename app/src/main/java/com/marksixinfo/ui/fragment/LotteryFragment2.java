@@ -128,6 +128,8 @@ public class LotteryFragment2 extends PageBaseFragment implements PagerGridLayou
 
         setDefaultSwitch();
 
+        isReload = true;//实时开奖刷新时间
+
         mLayoutManager = new PagerGridLayoutManager(mRows, mColumns, PagerGridLayoutManager
                 .HORIZONTAL);
 
@@ -483,11 +485,36 @@ public class LotteryFragment2 extends PageBaseFragment implements PagerGridLayou
 
 
     /**
-     * 开始加载
+     * 刷新时间
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isVisible) {
+            refreshTime();
+        }
+    }
+
+
+    /**
+     * 刷新时间
      */
     @Override
     protected void loadData() {
+        refreshTime();
+    }
 
+    /**
+     * 刷新倒计时
+     */
+    private void refreshTime() {
+        if (type == 0) {//0,开奖主页 1,实时开奖页
+            getCountDown(true);
+        } else {
+            if (realTimeFragment != null) {
+                realTimeFragment.getCountDown();
+            }
+        }
     }
 
     /**

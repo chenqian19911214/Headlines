@@ -422,7 +422,7 @@ public class LotteryRealTimeFragment extends MarkSixFragment {
     /**
      * 获取距离开奖秒数
      */
-    private void getCountDown() {
+    public void getCountDown() {
         new LotteryImpl(new MarkSixNetCallBack<LotteryCountDownData>(this, LotteryCountDownData.class) {
             @Override
             public void onSuccess(LotteryCountDownData response, int id) {

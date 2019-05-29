@@ -79,6 +79,8 @@
         <com.marksixinfo.widgets.LotteryRealTimeNumber
             android:id="@+id/lotteryRealTimeNumber"
             android:layout_width="match_parent"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
             android:layout_height="wrap_content" />
 
         <TextView

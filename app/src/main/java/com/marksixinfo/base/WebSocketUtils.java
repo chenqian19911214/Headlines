@@ -2,6 +2,7 @@ package com.marksixinfo.base;
 
 import android.app.Application;
 
+import com.marksixinfo.MarkSixApp;
 import com.marksixinfo.utils.MyLogAbleImpl;
 import com.zhangke.websocket.WebSocketHandler;
 import com.zhangke.websocket.WebSocketManager;
@@ -22,10 +23,14 @@ public class WebSocketUtils {
      */
 //    private static String connectUrl = "ws://121.40.165.18:8800";
 //    private static String connectUrl = "wss://echo.websocket.org/";
-    //线上
-    private static String connectUrl = "wss://www.sskk58.com:9200?type=lottery";
-            //测试
-//    private static String connectUrl = "wss://images.34399.com:9200?type=lottery";
+    /**
+     * 线上
+     */
+    private static String releaseUrl = "wss://www.sskk58.com:9200?type=lottery";
+    /**
+     * 测试
+     */
+    private static String testUrl = "wss://images.34399.com:9200?type=lottery";
 
     /**
      * 超时时间 毫秒
@@ -47,7 +52,7 @@ public class WebSocketUtils {
 
         WebSocketSetting setting = new WebSocketSetting();
         //连接地址，必填，例如 wss://echo.websocket.org
-        setting.setConnectUrl(connectUrl);//必填
+        setting.setConnectUrl(MarkSixApp.isDebug ? testUrl : releaseUrl);//必填
 
         //设置连接超时时间
         setting.setConnectTimeout(connectTimeout);

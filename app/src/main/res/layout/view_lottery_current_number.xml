@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginRight="5dp"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
@@ -35,8 +34,10 @@
 
 
     <ImageView
-        android:layout_width="37dp"
+        android:layout_width="38dp"
         android:layout_height="50dp"
+        android:layout_marginLeft="-2dp"
+        android:layout_marginRight="-2dp"
         android:padding="8dp"
         android:src="@drawable/icon_lottery_jiahao" />
 
@@ -47,9 +48,11 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/view_v7"
-            android:layout_width="41dp"
+            android:layout_width="42dp"
             android:layout_height="50dp"
             android:layout_marginBottom="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
             android:layout_marginTop="2dp"
             android:clickable="true"
             android:foreground="?attr/selectableItemBackground"
@@ -105,10 +108,12 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_scratch"
-            android:layout_width="41dp"
+            android:layout_width="42dp"
             android:layout_height="50dp"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
             app:cardCornerRadius="4dp"
             app:cardElevation="4dp"
             app:cardMaxElevation="4dp">
