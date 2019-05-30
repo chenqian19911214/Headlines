@@ -31,6 +31,7 @@ import com.marksixinfo.utils.CommonUtils;
 import com.marksixinfo.utils.EventBusUtil;
 import com.marksixinfo.utils.NotificationUtils;
 import com.marksixinfo.utils.SPUtil;
+import com.marksixinfo.utils.VersionUpdateUtils;
 import com.marksixinfo.widgets.EditionDialog;
 import com.marksixinfo.widgets.LotteryRemindDialog;
 import com.marksixinfo.widgets.NoAnimationViewPager;
@@ -89,9 +90,9 @@ public class MainActivity extends MarkSixActivity {
     private CommonNavigator commonNavigator;
     private int position;
     private LotteryRemindDialog remindDialog;
-    private EditionDialog updateDialog;
 
 
+    private VersionUpdateUtils versionUpdateUtils;
     @Override
     protected void onStart() {
         super.onStart();
@@ -113,7 +114,7 @@ public class MainActivity extends MarkSixActivity {
     @Override
     public void afterViews() {
         // 获取版本号
-        getInformation();
+        getVersionUpdate();
 //        WebSocketHandler.getDefault().addListener(socketListener);
         NotificationUtils.cancelNotification(getContext());
 
@@ -142,6 +143,22 @@ public class MainActivity extends MarkSixActivity {
         setMessage();
 
 //        tezt();
+    }
+
+    /**
+     * 处理版本更新
+     * */
+    private void getVersionUpdate() {
+        versionUpdateUtils = VersionUpdateUtils.initVersionUpdateUtils();
+        if (versionUpdateUtils!=null) {
+            versionUpdateUtils.getInformation();//获取当前服务器版本
+            versionUpdateUtils.setVersionCallback(new VersionUpdateUtils.VersionCallback() { //当需要更新是回调
+                @Override
+                public void CallbackData(EditionNameDate editionNameDater) {
+                    versionUpdateUtils.showEditionDialog(ActivityManager.getActivityManager().getCurrentActivity(),editionNameDater); //调用更新弹窗
+                }
+            });
+        }
     }
 
     private void tezt() {
@@ -286,11 +303,14 @@ public class MainActivity extends MarkSixActivity {
         }
     }
 
-
     /**
      * 即将开奖弹框提醒
      */
     private void showRemindDialog(Activity currentActivity) {
+        EditionDialog updateDialog = null;
+        if (versionUpdateUtils!=null) {
+            updateDialog = versionUpdateUtils.getUpdateDialog();
+        }
         if (updateDialog != null && updateDialog.isShowing()) {//有更新弹框,不提示开奖
             return;
         }
@@ -302,95 +322,7 @@ public class MainActivity extends MarkSixActivity {
         }
     }
 
-    /**
-     * 更新弹窗
-     */
-    private void showEditionDialog(EditionNameDate editionNameDater) {
-        Activity currentActivity = ActivityManager.getActivityManager().getCurrentActivity();
-        if (currentActivity != null && !currentActivity.isFinishing()) {
-            if (updateDialog == null || !updateDialog.isShowing()) {
-                updateDialog = new EditionDialog((ActivityIntentInterface) currentActivity, editionNameDater);
-                updateDialog.show();
-            }
-        }
-    }
-
     public int getPosition() {
         return position;
-    }
-
-    /**
-     * 获取当前版本
-     */
-    private void getInformation() {
-        String url = NetUrlGallery.GET_VERSION_NAME;
-        OkHttpClient client = new OkHttpClient();
-        final Request request = new Request.Builder().url(url).build();
-        Call call = client.newCall(request);
-        client.sslSocketFactory();
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Message message = handler.obtainMessage();
-                message.obj = "";
-                message.what = 1;
-                handler.sendMessage(message);
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                InputStream input = response.body().byteStream();
-                BufferedInputStream bufinput = new BufferedInputStream(input);
-                byte[] buffer = new byte[10000];
-                int bytes = bufinput.read(buffer);
-                final String str = new String(buffer, 0, bytes);
-                if (TextUtils.isEmpty(str))
-                    return;
-                Message message = handler.obtainMessage();
-                if (str.contains("<html>")) {
-                    message.obj = "";
-                    message.what = 1;
-                } else {
-                    message.obj = str;
-                    message.what = 0;
-                }
-                handler.sendMessage(message);
-            }
-        });
-    }
-
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == 0) { //请求成功
-                String str = (String) msg.obj;
-                EditionNameDate responsese = new Gson().fromJson(str, EditionNameDate.class);
-                if (responsese == null)
-                    return;
-                String serverVersionD = responsese.getVersion();
-                //  String serverVersionD = "2.0.2";
-                String localVersionD = ClientInfo.VERSION;
-                String serverVersion = serverVersionD.replace(".", "");
-                String localVersion = localVersionD.replace(".", "");
-
-                if (TextUtils.isEmpty(serverVersion) || TextUtils.isEmpty(serverVersion))
-                    return;
-                if ((Integer.valueOf(serverVersion) > Integer.valueOf(localVersion)) && !responsese.getState().equals("0")) {
-                    showEditionDialog(responsese);
-                }
-            } else { //请求失败
-                new android.os.Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        getInformation(); //5 秒后再次请求
-                    }
-                }, 10000);
-            }
-        }
-    };
-
-    public EditionDialog getUpdateDialog() {
-        return updateDialog;
     }
 }

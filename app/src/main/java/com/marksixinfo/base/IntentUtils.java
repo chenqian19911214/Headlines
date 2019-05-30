@@ -1,6 +1,7 @@
 package com.marksixinfo.base;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -15,6 +16,7 @@ import com.marksixinfo.bean.HashMapEntity;
 import com.marksixinfo.interfaces.ActivityIntentInterface;
 import com.marksixinfo.utils.CommonUtils;
 import com.marksixinfo.utils.LogUtils;
+import com.marksixinfo.utils.ToastShow;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -80,9 +82,14 @@ public class IntentUtils {
      */
     public static void gotoDefaultWeb(ActivityIntentInterface context, String url) {
         if (context != null && context.getActivity() != null) {
-            Uri uri = Uri.parse(url);
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            context.getActivity().startActivity(intent);
+            try {
+                Uri uri = Uri.parse(url);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                context.getActivity().startActivity(intent);
+            }catch (ActivityNotFoundException exception){
+              //  context.getActivity():
+                ToastShow.toastShow(context.getContext(),"请安装浏览器");
+            }
         }
     }
 

@@ -15,8 +15,10 @@ import com.marksixinfo.bean.TaskSignInData;
 import com.marksixinfo.interfaces.ActivityIntentInterface;
 import com.marksixinfo.net.impl.HeadlineImpl;
 import com.marksixinfo.ui.activity.MainActivity;
+import com.marksixinfo.utils.ActivityManager;
 import com.marksixinfo.utils.CommonUtils;
 import com.marksixinfo.utils.SPUtil;
+import com.marksixinfo.utils.VersionUpdateUtils;
 import com.marksixinfo.widgets.EditionDialog;
 import com.marksixinfo.widgets.SignInSuccessDialog;
 
@@ -118,8 +120,8 @@ public class MainHomeFragment extends PageBaseFragment {
      */
     private void showSignInSuccess() {
         if (signIn != null) {
-            EditionDialog updateDialog = ((MainActivity) getActivity()).getUpdateDialog();
-            if (updateDialog != null && updateDialog.isShowing()) {//有更新弹框,不提示签到
+          // EditionDialog updateDialog = VersionUpdateUtils.initVersionUpdateUtils().getUpdateDialog();
+            if (VersionUpdateUtils.initVersionUpdateUtils().isShowDialog()) {//有更新弹框,不提示签到
                 SPUtil.cleanTaskSignInTime(getContext());//更新后继续校验签到
                 return;
             }

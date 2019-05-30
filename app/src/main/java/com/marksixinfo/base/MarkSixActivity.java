@@ -53,6 +53,7 @@ public abstract class MarkSixActivity extends ActivityBase implements ActivityIn
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ActivityManager.getActivityManager().pushActivity(this);
         super.onCreate(savedInstanceState);
         ClientInfo.getScreenParam(this);
         LogUtils.d(TAG, "DEBUG=" + BuildConfig.DEBUG);
@@ -279,7 +280,6 @@ public abstract class MarkSixActivity extends ActivityBase implements ActivityIn
     @Override
     protected void onStart() {
         super.onStart();
-        ActivityManager.getActivityManager().pushActivity(this);
     }
 
     public void onResume() {
