@@ -82,7 +82,11 @@ public class IntentUtils {
         if (context != null && context.getActivity() != null) {
             Uri uri = Uri.parse(url);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            context.getActivity().startActivity(intent);
+            try {
+                context.getActivity().startActivity(intent);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
