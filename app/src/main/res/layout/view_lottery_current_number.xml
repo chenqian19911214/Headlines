@@ -48,12 +48,9 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/view_v7"
-            android:layout_width="42dp"
+            android:layout_width="44dp"
             android:layout_height="50dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginTop="2dp"
+            android:layout_margin="2dp"
             android:clickable="true"
             android:foreground="?attr/selectableItemBackground"
             android:orientation="vertical"
@@ -108,12 +105,9 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_scratch"
-            android:layout_width="42dp"
+            android:layout_width="44dp"
             android:layout_height="50dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
+            android:layout_margin="2dp"
             app:cardCornerRadius="4dp"
             app:cardElevation="4dp"
             app:cardMaxElevation="4dp">

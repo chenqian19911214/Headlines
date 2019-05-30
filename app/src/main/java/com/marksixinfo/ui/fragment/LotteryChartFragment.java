@@ -318,24 +318,26 @@ public class LotteryChartFragment extends PageBaseFragment implements
     @Override
     public void setShowCategory() {
         isShowDialog = !isShowDialog;
-        if (isShowDialog) {
-            rlCategoryRoot.setVisibility(View.VISIBLE);
-            if (!CommonUtils.ListNotNull(AutoFlowLayout.getAllTextView()) &&
-                    CommonUtils.ListNotNull(child)) {
-                for (int i = 0; i < child.size(); i++) {
-                    LotteryBaseData.CategroyBean.ChildBean childBean = child.get(i);
-                    if (childBean != null) {
-                        TextView textView = getCategoryTextView(childBean.getName());
-                        if (i == 0) {
-                            textView.setTextColor(0xfffc5c66);
+        if (rlCategoryRoot != null) {
+            if (isShowDialog) {
+                rlCategoryRoot.setVisibility(View.VISIBLE);
+                if (!CommonUtils.ListNotNull(AutoFlowLayout.getAllTextView()) &&
+                        CommonUtils.ListNotNull(child)) {
+                    for (int i = 0; i < child.size(); i++) {
+                        LotteryBaseData.CategroyBean.ChildBean childBean = child.get(i);
+                        if (childBean != null) {
+                            TextView textView = getCategoryTextView(childBean.getName());
+                            if (i == 0) {
+                                textView.setTextColor(0xfffc5c66);
+                            }
+                            AutoFlowLayout.addView(textView);
                         }
-                        AutoFlowLayout.addView(textView);
                     }
+                    AutoFlowLayout.setOnTextViewClickListener(this);
                 }
-                AutoFlowLayout.setOnTextViewClickListener(this);
+            } else {
+                rlCategoryRoot.setVisibility(View.GONE);
             }
-        } else {
-            rlCategoryRoot.setVisibility(View.GONE);
         }
     }
 
@@ -356,7 +358,7 @@ public class LotteryChartFragment extends PageBaseFragment implements
      */
     @Override
     public void changeSelect(int oldPosition, int newPosition) {
-        if(editPeriod==null)
+        if (editPeriod == null)
             return;
         if (oldPosition == type && editPeriod != null
                 && !oldNumber.equals(editPeriod.getText().toString().trim().replace("期", ""))) {
